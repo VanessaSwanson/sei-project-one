@@ -237,6 +237,7 @@ function moveGeorgeRight() {
 }
 moveGeorgeRight()
 
+
 // <----- Testing for collision ----->
 function detectCollision() {
   if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo')) {
@@ -289,9 +290,38 @@ function detectFallingInRoad() {
     cells[georgePosition].classList.remove('george')
     georgePosition = 59
     addSprite(georgePosition, 'george')
+  } else {
+    moveGeorgeRight()
   }
 } 
 detectFallingInRoad()
+
+// <----- Testing timer ----->
+let currentCountdown = 60
+const startButton = document.querySelector('.start')
+const countdownScreen = document.querySelector('#timeRemaining')
+console.log(countdownScreen.textContent)
+
+function handleStartCountdown() {
+  if (currentCountdown !== 60) return
+  const intervalId = setInterval(() => {
+    currentCountdown--
+    countdownScreen.innerHTML = currentCountdown
+    console.log(countdownScreen.textContent)
+    if (currentCountdown === 0) {
+      clearInterval(intervalId)
+      window.alert('You are out of time!')
+      currentCountdown = 60
+      countdownScreen.innerHTML = currentCountdown
+      cells[georgePosition].classList.remove('george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')
+    }
+  }, 500)
+}
+
+startButton.addEventListener('click', handleStartCountdown)
+
 
 
 
