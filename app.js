@@ -164,10 +164,12 @@ function moveSoupNaziRight() {
         removeSprite(soupNazi, 'soup-nazi')
         soupNazi = 42
         addSprite(soupNazi, 'soup-nazi')
+        detectCollision()
       } else if (soupNazi < 48) {
         removeSprite(soupNazi, 'soup-nazi')
         soupNazi++ 
         addSprite(soupNazi, 'soup-nazi')
+        detectCollision()
       }
     }, 700)
   })
@@ -230,8 +232,17 @@ function moveGeorgeRight() {
 console.log(cells[georgePosition].classList)
 moveGeorgeRight()
 
+// <----- Testing for collision ----->
+function detectCollision() {
+  if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo')) {
+      window.alert('Oh no!')
+      cells[georgePosition].classList.remove('george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')
+    }
+}
  
-// <----- Older versions of move functions for reference ----->
+// <----- Older versions of move functions for reference because I managed to do these without hard coding ----->
 
 // function moveSoupNazi() {
 //   setInterval(() => {
@@ -264,5 +275,7 @@ moveGeorgeRight()
 //   }, 1000)
 // }
 // moveUncleLeo()
+
+
 
 
