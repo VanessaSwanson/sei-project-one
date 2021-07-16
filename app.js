@@ -76,8 +76,8 @@ let currentSoupNaziPosition = [42, 45]
 const uncleLeoPosition = [41, 37]
 let currentUncleLeoPosition = [41, 37]
 const taxiPosition = 12
-const busPosition = [14, 18]
-let currentBusPosition = [14, 18]
+const busPosition = [21, 25]
+let currentBusPosition = [21, 25]
 
 
 function addSprite(position, assignedClass) {
@@ -94,7 +94,7 @@ uncleLeoPosition.forEach(uncleLeo => {
 
 addSprite(georgePosition, 'george')
 
-busPosition.forEach(bus => {
+currentBusPosition.forEach(bus => {
   addSprite(bus, 'bus')
 })
 
@@ -123,6 +123,7 @@ function moveGeorge(event) {
         georgePosition++
         console.log(georgePosition)
         arrivedAtHome()
+        detectFallingInRoad()
       }
       break
     case 37:
@@ -130,6 +131,7 @@ function moveGeorge(event) {
         georgePosition--
         console.log(georgePosition)
         arrivedAtHome()
+        detectFallingInRoad()
       }
       break
     case 38:
@@ -137,6 +139,7 @@ function moveGeorge(event) {
         georgePosition -= width
         console.log(georgePosition)
         arrivedAtHome()
+        detectFallingInRoad()
       }
       break
     case 40:
@@ -144,6 +147,7 @@ function moveGeorge(event) {
         georgePosition += width
         console.log(georgePosition)
         arrivedAtHome()
+        detectFallingInRoad()
       }
       break
   }
@@ -153,7 +157,6 @@ function moveGeorge(event) {
 
 // Then an event to listen out for the arrow buttons
 window.addEventListener('keyup', moveGeorge)
-
 
 
 
@@ -183,18 +186,17 @@ moveSoupNaziRight()
 function moveBusRight() {
   currentBusPosition = busPosition.map(bus => {
     setInterval(() => {
-      if (bus === 20) {
+      if (bus === 27) {
         removeSprite(bus, 'bus')
-        bus = 14
+        bus = 21
         addSprite(bus, 'bus')
-      } else if (bus < 20) {
+      } else if (bus < 27) {
         removeSprite(bus, 'bus')
         bus++
         addSprite(bus, 'bus')
       }
     }, 1500)
   })
-  console.log(currentBusPosition)
 }
 moveBusRight()
 
@@ -222,18 +224,17 @@ moveUncleLeoLeft()
 
 function moveGeorgeRight() {
   setInterval(() => {
-    if (georgePosition === 20 && cells[georgePosition].classList.contains('bus')) {
+    if (georgePosition === 27 && cells[georgePosition].classList.contains('bus')) {
       removeSprite(georgePosition, 'george')
-      georgePosition = 14
+      georgePosition = 21
       addSprite(georgePosition, 'george')
-    } else if (georgePosition < 20 && cells[georgePosition].classList.contains('bus')) {
+    } else if (georgePosition < 27 && cells[georgePosition].classList.contains('bus')) {
       removeSprite(georgePosition, 'george')
       georgePosition++
       addSprite(georgePosition, 'george')
     }
   }, 1500)
 }
-console.log(cells[georgePosition].classList)
 moveGeorgeRight()
 
 // <----- Testing for collision ----->
@@ -272,9 +273,28 @@ function arrivedAtHome() {
 // call function in moveGeorge function above
 
 
+// <----- Testing falling in road----->
+function createRoad() {
+  cells.filter(cell => {
+    if (cell.innerHTML >= width && cell.innerHTML < width * 4) {
+      cell.classList.add('road')
+    }
+  })
+}
+createRoad()
+
+function detectFallingInRoad() {
+  if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
+    window.alert('Oh no!')
+    cells[georgePosition].classList.remove('george')
+    georgePosition = 59
+    addSprite(georgePosition, 'george')
+  }
+} 
+detectFallingInRoad()
 
 
- 
+
 // <----- Older versions of move functions for reference because I managed to do these without hard coding ----->
 
 // function moveSoupNazi() {
