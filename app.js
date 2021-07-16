@@ -122,24 +122,28 @@ function moveGeorge(event) {
       if (georgePosition < cells.length - 1) {
         georgePosition++
         console.log(georgePosition)
+        arrivedAtHome()
       }
       break
     case 37:
       if (georgePosition > 0) {
         georgePosition--
         console.log(georgePosition)
+        arrivedAtHome()
       }
       break
     case 38:
       if (georgePosition >= width) {
         georgePosition -= width
         console.log(georgePosition)
+        arrivedAtHome()
       }
       break
     case 40:
       if (georgePosition <= cells.length - width) {
         georgePosition += width
         console.log(georgePosition)
+        arrivedAtHome()
       }
       break
   }
@@ -241,6 +245,35 @@ function detectCollision() {
       addSprite(georgePosition, 'george')
     }
 }
+
+// <----- Testing getting home ----->
+// For now, whole final row will be home
+
+function createHome() {
+  cells.filter(cell => {
+    if (cell.innerHTML < width) {
+      cell.classList.add('home')
+    }
+  })
+}
+createHome()
+
+function arrivedAtHome() {
+  if (cells[georgePosition].classList.contains('home')) {
+      window.alert('You did it!')
+      // currentScore = currentScore + 100
+      // scoreSpan.innerHTML = `${currentScore}`
+      removeSprite(georgePosition, 'george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')  
+    }
+}
+
+// call function in moveGeorge function above
+
+
+
+
  
 // <----- Older versions of move functions for reference because I managed to do these without hard coding ----->
 
