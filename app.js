@@ -120,6 +120,7 @@ function moveGeorge(event) {
   switch (event.keyCode) {
     case 39:
       if (georgePosition < cells.length - 1) {
+        cells[georgePosition].classList.remove('busBackdrop')
         georgePosition++
         console.log(georgePosition)
         arrivedAtHome()
@@ -128,6 +129,7 @@ function moveGeorge(event) {
       break
     case 37:
       if (georgePosition > 0) {
+        cells[georgePosition].classList.remove('busBackdrop')
         georgePosition--
         console.log(georgePosition)
         arrivedAtHome()
@@ -136,6 +138,7 @@ function moveGeorge(event) {
       break
     case 38:
       if (georgePosition >= width) {
+        cells[georgePosition].classList.remove('busBackdrop')
         georgePosition -= width
         console.log(georgePosition)
         arrivedAtHome()
@@ -144,6 +147,7 @@ function moveGeorge(event) {
       break
     case 40:
       if (georgePosition <= cells.length - width) {
+        cells[georgePosition].classList.remove('busBackdrop')
         georgePosition += width
         console.log(georgePosition)
         arrivedAtHome()
@@ -219,23 +223,31 @@ moveUncleLeoLeft()
 
 
 // <----- Making George move with the buses ----->
-// repetition of function, but again, just testing for now
-// Moving one space ahead of bus!!
+// Have amended below so it now looks like George is travelling with the bus
+// seems overly complicated - sure there's an easier way to do it!
+
 
 function moveGeorgeRight() {
   setInterval(() => {
     if (georgePosition === 27 && cells[georgePosition].classList.contains('bus')) {
       removeSprite(georgePosition, 'george')
+      cells[georgePosition].classList.remove('busBackdrop')
       georgePosition = 21
-      addSprite(georgePosition, 'george')
+      cells[georgePosition].classList.add('busBackdrop')
+      cells[georgePosition-1].classList.remove('bus')
     } else if (georgePosition < 27 && cells[georgePosition].classList.contains('bus')) {
       removeSprite(georgePosition, 'george')
+      cells[georgePosition].classList.remove('busBackdrop')
       georgePosition++
-      addSprite(georgePosition, 'george')
+      cells[georgePosition].classList.add('busBackdrop')
+      cells[georgePosition-1].classList.remove('bus')
     }
   }, 1500)
 }
+
 moveGeorgeRight()
+
+console.log(georgePosition-1)
 
 
 // <----- Testing for collision ----->

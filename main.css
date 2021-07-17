@@ -79,7 +79,12 @@ body {
 
 /* having George come last in order means he shows above other sprites */
 .george {
-  background-image: url(./design-elements/costanza.png);
+  background-image: url(./design-elements/george.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.busBackdrop {
+  background-image: url(./design-elements/busBackdrop.png);
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -100,6 +105,4 @@ body {
 .road {
   background-color: gray;
 }
-.busRoad {
-  background-color: gray;
-}
+
