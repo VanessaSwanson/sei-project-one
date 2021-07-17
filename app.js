@@ -260,14 +260,28 @@ function createHome() {
 }
 createHome()
 
+// creating home cells
+const homeStretchArray = cells.filter(cell => {
+    return cell.classList.contains('home')
+  })
+
+  console.log(homeStretchArray)
+
+// Works on one George Sprite
+
+let georgeAtHome = null
+
 function arrivedAtHome() {
   if (cells[georgePosition].classList.contains('home')) {
       window.alert('You did it!')
+      // currentCountdown = 60
+      // countdownScreen.innerHTML = currentCountdown
       // currentScore = currentScore + 100
       // scoreSpan.innerHTML = `${currentScore}`
       removeSprite(georgePosition, 'george')
       georgePosition = 59
       addSprite(georgePosition, 'george')  
+      georgeAtHome = true
     }
 }
 
@@ -275,14 +289,25 @@ function arrivedAtHome() {
 
 
 // <----- Testing falling in road----->
+
+// Making road just one line while I test
 function createRoad() {
   cells.filter(cell => {
-    if (cell.innerHTML >= width && cell.innerHTML < width * 4) {
+    if (cell.innerHTML >= width * 3 && cell.innerHTML < width * 4) {
       cell.classList.add('road')
     }
   })
 }
 createRoad()
+
+// function createRoad() {
+//   cells.filter(cell => {
+//     if (cell.innerHTML >= width && cell.innerHTML < width * 4) {
+//       cell.classList.add('road')
+//     }
+//   })
+// }
+// createRoad()
 
 function detectFallingInRoad() {
   if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
@@ -297,32 +322,43 @@ function detectFallingInRoad() {
 detectFallingInRoad()
 
 // <----- Testing timer ----->
+
+// Timer that registers if George is home and resets
+// Meant amending georgeHome function to update a let georgeAtHome boolean variable that could be read by timer
+// Long messy code, but again, just testing right now!
+
 let currentCountdown = 60
 const startButton = document.querySelector('.start')
 const countdownScreen = document.querySelector('#timeRemaining')
 console.log(countdownScreen.textContent)
 
 function handleStartCountdown() {
-  if (currentCountdown !== 60) return
+  if (currentCountdown !== 60 && !cells[georgePosition].classList.contains('home')) return
   const intervalId = setInterval(() => {
     currentCountdown--
     countdownScreen.innerHTML = currentCountdown
     console.log(countdownScreen.textContent)
     if (currentCountdown === 0) {
       clearInterval(intervalId)
-      window.alert('You are out of time!')
+      window.alert('Game over - you are out of time!')
       currentCountdown = 60
       countdownScreen.innerHTML = currentCountdown
       cells[georgePosition].classList.remove('george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
+    } else if (georgeAtHome) {
+      clearInterval(intervalId)
+      currentCountdown = 60
+      countdownScreen.innerHTML = currentCountdown
+      cells[georgePosition].classList.remove('george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')
+      georgeAtHome = false
     }
   }, 500)
 }
 
 startButton.addEventListener('click', handleStartCountdown)
-
-
 
 
 // <----- Older versions of move functions for reference because I managed to do these without hard coding ----->
