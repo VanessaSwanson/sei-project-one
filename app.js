@@ -122,6 +122,7 @@ function moveGeorge(event) {
         console.log(georgePosition)
         arrivedAtHome()
         detectFallingInRoad()
+        addCoffeePoints()
       }
       break
     case 37:
@@ -131,6 +132,7 @@ function moveGeorge(event) {
         console.log(georgePosition)
         arrivedAtHome()
         detectFallingInRoad()
+        addCoffeePoints()
       }
       break
     case 38:
@@ -140,6 +142,7 @@ function moveGeorge(event) {
         console.log(georgePosition)
         arrivedAtHome()
         detectFallingInRoad()
+        addCoffeePoints()
       }
       break
     case 40:
@@ -149,6 +152,7 @@ function moveGeorge(event) {
         console.log(georgePosition)
         arrivedAtHome()
         detectFallingInRoad()
+        addCoffeePoints()
       }
       break
   }
@@ -252,6 +256,17 @@ moveCoffeeHome()
 const scoreScreen = document.querySelector('#currentScore')
 let currentScore = 0
 console.log(scoreScreen.innerHTML)
+
+function addCoffeePoints() {
+  if (cells[georgePosition].classList.contains('coffee')) {
+    currentScore = currentScore + 100
+    scoreScreen.innerHTML = currentScore
+    cells[georgePosition].classList.remove('coffee')
+  }
+}
+
+// call in moveGeorge function
+
 
 
 // <----- Making George move with the buses ----->
