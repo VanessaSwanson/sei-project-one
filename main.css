@@ -6,6 +6,8 @@ body {
   justify-content: space-around;
   align-items: center;
 }
+
+/* <----- Controls ----->  */
 .controls {
   display: flex;
   flex-direction: column;
@@ -16,6 +18,11 @@ body {
   padding: 50px 30px;
 }
 .timer {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.score {
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 20px;
@@ -77,11 +84,19 @@ body {
   background-size: contain;
 }
 
+.coffee {
+  background-image: url(./design-elements/coffee.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
 /* having George come last in order means he shows above other sprites */
 .george {
   background-image: url(./design-elements/george.jpg);
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 .busBackdrop {
   background-image: url(./design-elements/busBackdrop.png);
@@ -91,9 +106,7 @@ body {
 
 
 /* <----- Border -----> */
-/* Looks shit right now but just testing! */
 .borderLeft {
-  /* background-image: url(./design-elements/brick.png); */
   background-repeat: no-repeat;
   background-size: contain;
 }

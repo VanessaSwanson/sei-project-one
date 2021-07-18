@@ -21,8 +21,7 @@ createGrid()
 
 // <----- Testing border to see if it helps sprite movement ----->
 // Really long code atm - will try to simplify at a later stage
-// Need to adapt George left and right functionality accordingly
-// He needs to stop being able to move one step before, which means I need another class for the columns by the border!
+// In George movement function, added that once George is in a borderLeft or borderRight cell, he can't move left or right - stops him being able to travel over edge of rows
 
 const borderCells = []
 
@@ -73,6 +72,8 @@ let currentUncleLeoPosition = [41, 37]
 const taxiPosition = 12
 const busPosition = [21, 25]
 let currentBusPosition = [21, 25]
+let currentCoffeePositionHome = 0
+let currentCoffeePositionMid = width * 4 + 4
 
 
 function addSprite(position, assignedClass) {
@@ -93,6 +94,8 @@ currentBusPosition.forEach(bus => {
   addSprite(bus, 'bus')
 })
 
+addSprite(currentCoffeePositionMid, 'coffee')
+addSprite(currentCoffeePositionHome, 'coffee')
 
 // And removing...
 function removeSprite(position, assignedClass) {
@@ -215,6 +218,41 @@ function moveUncleLeoLeft() {
 }
 moveUncleLeoLeft()
 
+// Only want the coffee to appear in safe spaces
+// To make it more fun and to give more chances to earn points, I want it to appear in both home and mid-way stretch
+function generateRandomCoffeePositionHome() {
+  return Math.floor(Math.random() * width)
+}
+
+function generateRandomCoffeePositionMid() {
+  const min = Math.ceil(width * 4)
+  const max = Math.floor(width * 5)
+  return Math.floor((Math.random() * (max - min) + min))
+}
+
+function moveCoffeeMid() {
+  setInterval(() => {
+    removeSprite(currentCoffeePositionMid, 'coffee')
+    currentCoffeePositionMid = (generateRandomCoffeePositionMid())
+    addSprite(currentCoffeePositionMid, 'coffee')
+  }, 5000)
+}
+moveCoffeeMid()
+
+function moveCoffeeHome() {
+  setInterval(() => {
+    removeSprite(currentCoffeePositionHome, 'coffee')
+    currentCoffeePositionHome = (generateRandomCoffeePositionHome())
+    addSprite(currentCoffeePositionHome, 'coffee')
+  }, 5000)
+}
+moveCoffeeHome()
+
+// <----- Testing adding score if George gets a coffee ----->
+const scoreScreen = document.querySelector('#currentScore')
+let currentScore = 0
+console.log(scoreScreen.innerHTML)
+
 
 // <----- Making George move with the buses ----->
 // Have amended below so it now looks like George is travelling with the bus
@@ -254,45 +292,6 @@ function detectCollision() {
     }
 }
 
-// <----- Testing getting home ----->
-// For now, whole final row will be home
-
-function createHome() {
-  cells.filter(cell => {
-    if (cell.innerHTML < width) {
-      cell.classList.add('home')
-    }
-  })
-}
-createHome()
-
-// creating home cells
-const homeStretchArray = cells.filter(cell => {
-    return cell.classList.contains('home')
-  })
-
-  console.log(homeStretchArray)
-
-// Works on one George Sprite
-
-let georgeAtHome = null
-
-function arrivedAtHome() {
-  if (cells[georgePosition].classList.contains('home')) {
-      window.alert('You did it!')
-      // currentCountdown = 60
-      // countdownScreen.innerHTML = currentCountdown
-      // currentScore = currentScore + 100
-      // scoreSpan.innerHTML = `${currentScore}`
-      removeSprite(georgePosition, 'george')
-      georgePosition = 59
-      addSprite(georgePosition, 'george')  
-      georgeAtHome = true
-    }
-}
-
-// call function in moveGeorge function above
-
 
 // <----- Testing falling in road----->
 
@@ -325,7 +324,42 @@ function detectFallingInRoad() {
     moveGeorgeRight()
   }
 } 
-detectFallingInRoad()
+// detectFallingInRoad()
+
+
+
+// <----- Testing getting home ----->
+// For now, whole final row will be home
+// Right now, code commented out below (both home and timer) works for one George sprite, but what if I want to get a family of George's home...
+
+function createHome() {
+  cells.filter(cell => {
+    if (cell.innerHTML < width) {
+      cell.classList.add('home')
+    }
+  })
+}
+createHome()
+
+
+let georgeAtHome = false
+
+function arrivedAtHome() {
+  if (cells[georgePosition].classList.contains('home')) {
+      // currentCountdown = 60
+      // countdownScreen.innerHTML = currentCountdown
+      // currentScore = currentScore + 500
+      currentScore.innerHTML = currentScore
+      window.alert(`You did it! Your final score is ${currentScore}`)
+      // removeSprite(georgePosition, 'george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')  
+      georgeAtHome = true
+    }
+}
+
+// call function in moveGeorge function above
+
 
 // <----- Testing timer ----->
 
@@ -336,7 +370,7 @@ detectFallingInRoad()
 let currentCountdown = 60
 const startButton = document.querySelector('.start')
 const countdownScreen = document.querySelector('#timeRemaining')
-console.log(countdownScreen.textContent)
+console.log(countdownScreen.innerHTML)
 
 function handleStartCountdown() {
   if (currentCountdown !== 60 && !cells[georgePosition].classList.contains('home')) return
@@ -352,10 +386,13 @@ function handleStartCountdown() {
       cells[georgePosition].classList.remove('george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
+      georgeAtHome = true
     } else if (georgeAtHome) {
       clearInterval(intervalId)
       currentCountdown = 60
       countdownScreen.innerHTML = currentCountdown
+      // currentScore = 0
+      // scoreScreen.innerHTML = currentScore
       cells[georgePosition].classList.remove('george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
