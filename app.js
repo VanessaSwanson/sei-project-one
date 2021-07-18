@@ -212,10 +212,12 @@ function moveUncleLeoLeft() {
         removeSprite(uncleLeo, 'uncle-leo')
         uncleLeo = 41
         addSprite(uncleLeo, 'uncle-leo')
+        detectCollision()
       } else if (uncleLeo > 35) {
         removeSprite(uncleLeo, 'uncle-leo')
         uncleLeo--
         addSprite(uncleLeo, 'uncle-leo')
+        detectCollision()
       }
     }, 1000)
   })
@@ -258,7 +260,12 @@ let currentScore = 0
 console.log(scoreScreen.innerHTML)
 
 function addCoffeePoints() {
-  if (cells[georgePosition].classList.contains('coffee')) {
+  if (georgeInRoad || georgeHasCollided) {
+    currentScore = 0
+    scoreScreen.innerHTML = currentScore
+    // georgeInRoad = false
+    georgeHasCollided = false
+  } else if (cells[georgePosition].classList.contains('coffee')) {
     currentScore = currentScore + 100
     scoreScreen.innerHTML = currentScore
     cells[georgePosition].classList.remove('coffee')
@@ -298,15 +305,18 @@ console.log(georgePosition-1)
 
 
 // <----- Testing for collision ----->
+let georgeHasCollided = null
+
 function detectCollision() {
   if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo')) {
+      georgeHasCollided = true
+      addCoffeePoints()
       window.alert('Oh no!')
       cells[georgePosition].classList.remove('george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
     }
 }
-
 
 // <----- Testing falling in road----->
 
@@ -329,12 +339,15 @@ createRoad()
 // }
 // createRoad()
 
+let georgeInRoad = null
+
 function detectFallingInRoad() {
   if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
     window.alert('Oh no!')
     cells[georgePosition].classList.remove('george')
     georgePosition = 59
     addSprite(georgePosition, 'george')
+    georgeInRoad = true
   } else {
     moveGeorgeRight()
   }
