@@ -260,12 +260,11 @@ let currentScore = 0
 console.log(scoreScreen.innerHTML)
 
 function addCoffeePoints() {
-  if (georgeInRoad || georgeHasCollided || georgeAtHome) {
+  if (georgeInRoad || georgeHasCollided || (georgeAtHome && currentCountdown < 60)) {
     currentScore = 0
     scoreScreen.innerHTML = currentScore
     georgeInRoad = false
     georgeHasCollided = false
-    georgeAtHome = false
   } else if (cells[georgePosition].classList.contains('coffee')) {
     currentScore = currentScore + 100
     scoreScreen.innerHTML = currentScore
@@ -274,7 +273,6 @@ function addCoffeePoints() {
 }
 
 // call in moveGeorge function
-
 
 
 // <----- Making George move with the buses ----->
@@ -375,7 +373,7 @@ let georgeAtHome = false
 
 function arrivedAtHome() {
   if (cells[georgePosition].classList.contains('home')) {
-      // currentScore = currentScore + 500
+      currentScore = currentScore + 500
       addCoffeePoints()
       currentScore.innerHTML = currentScore
       window.alert(`You did it! Your final score is ${currentScore}`)
@@ -418,8 +416,6 @@ function handleStartCountdown() {
       clearInterval(intervalId)
       currentCountdown = 60
       countdownScreen.innerHTML = currentCountdown
-      // currentScore = 0
-      // scoreScreen.innerHTML = currentScore
       cells[georgePosition].classList.remove('george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
