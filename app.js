@@ -280,7 +280,7 @@ function addCoffeePoints() {
 // seems overly complicated - sure there's an easier way to do it!
 
 
-function moveGeorgeRight() {
+function moveGeorgeRightWithBus() {
   setInterval(() => {
     if (georgePosition === 27 && cells[georgePosition].classList.contains('bus')) {
       removeSprite(georgePosition, 'george')
@@ -294,11 +294,11 @@ function moveGeorgeRight() {
       georgePosition++
       cells[georgePosition].classList.add('busBackdrop')
       cells[georgePosition-1].classList.remove('bus')
-    }
+    } 
   }, 1500)
 }
 
-moveGeorgeRight()
+moveGeorgeRightWithBus()
 
 console.log(georgePosition-1)
 
@@ -309,6 +309,7 @@ let georgeHasCollided = null
 function detectCollision() {
   if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo')) {
       georgeHasCollided = true
+      livesCountdown()
       addCoffeePoints()
       window.alert('Oh no!')
       cells[georgePosition].classList.remove('george')
@@ -342,16 +343,34 @@ let georgeInRoad = null
 
 function detectFallingInRoad() {
   if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
+    georgeInRoad = true
+    livesCountdown()
     window.alert('Oh no!')
     cells[georgePosition].classList.remove('george')
     georgePosition = 59
     addSprite(georgePosition, 'george')
-    georgeInRoad = true
   } else {
-    moveGeorgeRight()
+    moveGeorgeRightWithBus()
   }
 } 
 // detectFallingInRoad()
+
+// <----- Testing Lives ----->
+let currentLives = 3
+const livesScreen = document.querySelector('#currentLives')
+
+function livesCountdown() {
+  if (currentLives > 1 && georgeHasCollided || georgeInRoad) {
+    currentLives--
+    livesScreen.innerHTML = currentLives 
+  } else {
+    window.alert('You have run out of lives!')
+    georgeAtHome = true
+    currentLives = 3
+    livesScreen.innerHTML = currentLives 
+  }
+}
+// livesCountdown()
 
 
 
@@ -408,6 +427,10 @@ function handleStartCountdown() {
       window.alert('Game over - you are out of time!')
       currentCountdown = 60
       countdownScreen.innerHTML = currentCountdown
+      currentScore = 0
+      scoreScreen.innerHTML = currentScore
+      currentLives = 3
+      livesScreen.innerHTML = currentLives
       cells[georgePosition].classList.remove('george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
