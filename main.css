@@ -95,6 +95,12 @@ body {
   background-size: contain;
   background-position: center;
 }
+.trash {
+  background-image: url(./design-elements/trash.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
 
 /* having George come last in order means he shows above other sprites */
 .george {

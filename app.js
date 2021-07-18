@@ -307,7 +307,7 @@ console.log(georgePosition-1)
 let georgeHasCollided = null
 
 function detectCollision() {
-  if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo')) {
+  if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo') || cells[georgePosition].classList.contains('trash')) {
       georgeHasCollided = true
       livesCountdown()
       addCoffeePoints()
@@ -374,18 +374,41 @@ function livesCountdown() {
 
 
 
+// <----- Testing getting home a family of Georges ----->
+
+
 // <----- Testing getting home ----->
-// For now, whole final row will be home
 // Right now, code commented out below (both home and timer) works for one George sprite, but what if I want to get a family of George's home...
 
-function createHome() {
-  cells.filter(cell => {
+// First, place bins to avoid so I can use some and every logic on home stretch
+
+const homeStretch = cells.filter(cell => {
     if (cell.innerHTML < width) {
       cell.classList.add('home')
     }
   })
-}
-createHome()
+console.log(homeStretch)
+
+cells.forEach(cell => {
+  if (cell.innerHTML < width && cell.innerHTML % 2 === 0) {
+    cell.classList.add('trash')
+    cell.classList.remove('home')
+  }
+})
+
+// Then add trash cans to detection function above...
+
+
+
+// function createHome() {
+//   cells.filter(cell => {
+//     if (cell.innerHTML < width) {
+//       cell.classList.add('home')
+//     }
+//   })
+// }
+// createHome()
+
 
 
 let georgeAtHome = false
@@ -395,7 +418,7 @@ function arrivedAtHome() {
       currentScore = currentScore + 500
       addCoffeePoints()
       currentScore.innerHTML = currentScore
-      window.alert(`You did it! Your final score is ${currentScore}`)
+      window.alert(`You did it! You got your first George home, now try another`)
       georgePosition = 59
       addSprite(georgePosition, 'george')  
       georgeAtHome = true
@@ -431,17 +454,17 @@ function handleStartCountdown() {
       scoreScreen.innerHTML = currentScore
       currentLives = 3
       livesScreen.innerHTML = currentLives
-      cells[georgePosition].classList.remove('george')
-      georgePosition = 59
-      addSprite(georgePosition, 'george')
+      // cells[georgePosition].classList.remove('george')
+      // georgePosition = 59
+      // addSprite(georgePosition, 'george')
       georgeAtHome = true
     } else if (georgeAtHome) {
       clearInterval(intervalId)
       currentCountdown = 60
       countdownScreen.innerHTML = currentCountdown
-      cells[georgePosition].classList.remove('george')
-      georgePosition = 59
-      addSprite(georgePosition, 'george')
+      // cells[georgePosition].classList.remove('george')
+      // georgePosition = 59
+      // addSprite(georgePosition, 'george')
       georgeAtHome = false
     }
   }, 500)
