@@ -92,8 +92,12 @@ body {
 
 /* <----- Border -----> */
 /* Looks shit right now but just testing! */
-.border {
-  background-image: url(./design-elements/brick.png);
+.borderLeft {
+  /* background-image: url(./design-elements/brick.png); */
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.borderRight {
   background-repeat: no-repeat;
   background-size: contain;
 }

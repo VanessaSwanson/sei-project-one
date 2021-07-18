@@ -22,53 +22,48 @@ createGrid()
 // <----- Testing border to see if it helps sprite movement ----->
 // Really long code atm - will try to simplify at a later stage
 // Need to adapt George left and right functionality accordingly
+// He needs to stop being able to move one step before, which means I need another class for the columns by the border!
 
-// const borderCells = []
+const borderCells = []
 
-// function addToBorderArray() {
-//   cells.forEach(cell => {
-//     if ((cell.innerHTML % width === 0)) {
-//       borderCells.push(cell)  
-//     } 
-//     // console.log(borderCells)
-//   })
-// }
-// addToBorderArray()
+function addToLeftBorderArray() {
+  cells.forEach(cell => {
+    if ((cell.innerHTML % width === 0)) {
+      borderCells.push(cell)  
+    } 
+    // console.log(borderCells)
+  })
+}
+addToLeftBorderArray()
 
-// function addBorderClass() {
-//   borderCells.forEach(cell => {
-//     cell.classList.add('border')
-//   })
-// }
-// addBorderClass()
+function addLeftBorderClass() {
+  borderCells.forEach(cell => {
+    cell.classList.add('borderLeft')
+  })
+}
+addLeftBorderClass()
 
-// const rightBorderCells = []
+const rightBorderCells = []
 
-// function addToRightBorderArray() {
-//   borderCells.forEach(cell => {
-//     const rightBorderCellValue = parseFloat(cell.innerHTML) + width - 1
-//     rightBorderCells.push(rightBorderCellValue)
-//     console.log(rightBorderCellValue)
-//   })
-// }
-// addToRightBorderArray()
-// console.log(rightBorderCells)
+function addToRightBorderArray() {
+  borderCells.forEach(cell => {
+    const rightBorderCellValue = parseFloat(cell.innerHTML) + width - 1
+    rightBorderCells.push(rightBorderCellValue)
+    console.log(rightBorderCellValue)
+  })
+}
+addToRightBorderArray()
+console.log(rightBorderCells)
 
-// function addRightBorderClass() {
-//   cells.forEach(cell => {
-//     if (rightBorderCells.includes(parseFloat(cell.innerHTML)))
-//     cell.classList.add('border')
-//   })
-// }
-// addRightBorderClass()
+function addRightBorderClass() {
+  cells.forEach(cell => {
+    if (rightBorderCells.includes(parseFloat(cell.innerHTML)))
+    cell.classList.add('borderRight')
+  })
+}
+addRightBorderClass()
 
 // <----- Testing creating and removing sprites ----->
-// let georgePosition = 59
-// const soupNaziPosition = 42
-// let currentSoupNaziPosition = 42
-// const uncleLeoPosition = 41
-// let currentUncleLeoPosition = 41
-// const taxiPosition = 12
 
 let georgePosition = 59
 const soupNaziPosition = [42, 45]
@@ -105,7 +100,6 @@ function removeSprite(position, assignedClass) {
 }
 
 
-
 // <----- Testing moving with arrow keys ----->
 
 console.log(cells[georgePosition].classList)
@@ -119,7 +113,7 @@ function moveGeorge(event) {
   // can still go over onto a different row, but I'll see if we can tackle that later!
   switch (event.keyCode) {
     case 39:
-      if (georgePosition < cells.length - 1) {
+      if (georgePosition < cells.length - 1 && !cells[georgePosition].classList.contains('borderRight')) {
         cells[georgePosition].classList.remove('busBackdrop')
         georgePosition++
         console.log(georgePosition)
@@ -128,7 +122,7 @@ function moveGeorge(event) {
       }
       break
     case 37:
-      if (georgePosition > 0) {
+      if (georgePosition > 0 && !cells[georgePosition].classList.contains('borderLeft')) {
         cells[georgePosition].classList.remove('busBackdrop')
         georgePosition--
         console.log(georgePosition)
