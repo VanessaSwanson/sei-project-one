@@ -260,11 +260,13 @@ let currentScore = 0
 console.log(scoreScreen.innerHTML)
 
 function addCoffeePoints() {
-  if (georgeInRoad || georgeHasCollided || (georgeAtHome && currentCountdown < 60)) {
+  if (outOfLives) {
+  // if (georgeInRoad || georgeHasCollided || (georgeAtHome && currentCountdown < 60)) {
     currentScore = 0
     scoreScreen.innerHTML = currentScore
     georgeInRoad = false
     georgeHasCollided = false
+    outOfLives = false
   } else if (cells[georgePosition].classList.contains('coffee')) {
     currentScore = currentScore + 100
     scoreScreen.innerHTML = currentScore
@@ -354,6 +356,7 @@ function detectFallingInRoad() {
     cells[georgePosition].classList.remove('george')
     georgePosition = 59
     addSprite(georgePosition, 'george')
+    georgeInRoad = false
   } else if (currentLives <=1 && georgeInRoad) {
     window.alert('You have run out of lives!')
     outOfLives = true
@@ -392,6 +395,9 @@ function livesCountdown() {
     livesScreen.innerHTML = currentLives 
   } else {
     window.alert('You have run out of lives!')
+    clearInterval(intervalId)
+    currentCountdown = 60
+    countdownScreen.innerHTML = currentCountdown
     georgeAtHome = true
     outOfLives = true
     currentLives = 3
@@ -445,8 +451,6 @@ cells.forEach(cell => {
 // }
 // createHome()
 
-
-
 let georgeAtHome = false
 
 function arrivedAtHome() {
@@ -474,10 +478,11 @@ let currentCountdown = 60
 const startButton = document.querySelector('.start')
 const countdownScreen = document.querySelector('#timeRemaining')
 console.log(countdownScreen.innerHTML)
+let intervalId = null
 
 function handleStartCountdown() {
   if (currentCountdown !== 60 && !cells[georgePosition].classList.contains('home')) return
-  const intervalId = setInterval(() => {
+  intervalId = setInterval(() => {
     currentCountdown--
     countdownScreen.innerHTML = currentCountdown
     console.log(countdownScreen.textContent)
@@ -490,23 +495,45 @@ function handleStartCountdown() {
       scoreScreen.innerHTML = currentScore
       currentLives = 3
       livesScreen.innerHTML = currentLives
-      // cells[georgePosition].classList.remove('george')
-      // georgePosition = 59
-      // addSprite(georgePosition, 'george')
       georgeAtHome = true
-    } else if (georgeAtHome) {
-      clearInterval(intervalId)
-      currentCountdown = 60
-      countdownScreen.innerHTML = currentCountdown
-      // cells[georgePosition].classList.remove('george')
-      // georgePosition = 59
-      // addSprite(georgePosition, 'george')
-      georgeAtHome = false
     }
   }, 500)
 }
 
 startButton.addEventListener('click', handleStartCountdown)
+
+// function handleStartCountdown() {
+//   if (currentCountdown !== 60 && !cells[georgePosition].classList.contains('home')) return
+//   const intervalId = setInterval(() => {
+//     currentCountdown--
+//     countdownScreen.innerHTML = currentCountdown
+//     console.log(countdownScreen.textContent)
+//     if (currentCountdown === 0) {
+//       clearInterval(intervalId)
+//       window.alert('Game over - you are out of time!')
+//       currentCountdown = 60
+//       countdownScreen.innerHTML = currentCountdown
+//       currentScore = 0
+//       scoreScreen.innerHTML = currentScore
+//       currentLives = 3
+//       livesScreen.innerHTML = currentLives
+//       // cells[georgePosition].classList.remove('george')
+//       // georgePosition = 59
+//       // addSprite(georgePosition, 'george')
+//       georgeAtHome = true
+//     } else if (outOfLives) {
+//       clearInterval(intervalId)
+//       currentCountdown = 60
+//       countdownScreen.innerHTML = currentCountdown
+//       // cells[georgePosition].classList.remove('george')
+//       // georgePosition = 59
+//       // addSprite(georgePosition, 'george')
+//       georgeAtHome = false
+//     }
+//   }, 500)
+// }
+
+// startButton.addEventListener('click', handleStartCountdown)
 
 
 
