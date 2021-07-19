@@ -19,6 +19,18 @@ function createGrid() {
 }
 createGrid()
 
+// <----- Testing with start screen ----->
+const enterButton = document.querySelector('#enter')
+const startScreen = document.querySelector('#startScreen')
+const mainGameDisplay = document.querySelector('.main')
+
+function startScreenEnter() {
+  startScreen.style.display = 'none'
+  mainGameDisplay.style.display = 'flex'
+}
+ enterButton.addEventListener('click', startScreenEnter)
+
+
 // <----- Testing border ----->
 // Really long code atm - will try to simplify at a later stage
 // In George movement function, added that once George is in a borderLeft or borderRight cell, he can't move left or right - stops him being able to travel over edge of rows

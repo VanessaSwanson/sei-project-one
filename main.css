@@ -1,12 +1,37 @@
 * {
   box-sizing: border-box;
 }
-body {
-  display: flex;
+.main {
+  /* display: flex; */
   justify-content: space-around;
   align-items: center;
+  display: none;
 }
-
+#startScreen {
+  background-image: url(./design-elements/cafe.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 900px;
+  background-position: center;
+  text-align: center;
+}
+h1 {
+  padding-top: 350px;
+  font-size: 80px;
+  font-family: monospce;
+  color: #fdf5e0;
+}
+#enter {
+  font-size: 20px;
+  padding: 10px 30px;
+  font-family: helvetica;
+  color: #fdf5e0;
+  background-color: #e18074;
+  border-radius: 5px;
+  border: #fdf5e0 solid 5px;
+  cursor: pointer;
+  
+}
 /* <----- Controls ----->  */
 .controls {
   display: flex;
