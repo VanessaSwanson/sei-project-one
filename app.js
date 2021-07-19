@@ -19,7 +19,7 @@ function createGrid() {
 }
 createGrid()
 
-// <----- Testing border to see if it helps sprite movement ----->
+// <----- Testing border ----->
 // Really long code atm - will try to simplify at a later stage
 // In George movement function, added that once George is in a borderLeft or borderRight cell, he can't move left or right - stops him being able to travel over edge of rows
 
@@ -261,7 +261,6 @@ console.log(scoreScreen.innerHTML)
 
 function addCoffeePoints() {
   if (outOfLives) {
-  // if (georgeInRoad || georgeHasCollided || (georgeAtHome && currentCountdown < 60)) {
     currentScore = 0
     scoreScreen.innerHTML = currentScore
     georgeInRoad = false
@@ -360,6 +359,9 @@ function detectFallingInRoad() {
   } else if (currentLives <=1 && georgeInRoad) {
     window.alert('You have run out of lives!')
     outOfLives = true
+    clearInterval(intervalId)
+    currentCountdown = 60
+    countdownScreen.innerHTML = currentCountdown
     currentLives = 3
     livesScreen.innerHTML = currentLives
     georgePosition = 59
@@ -368,20 +370,6 @@ function detectFallingInRoad() {
     moveGeorgeRightWithBus()
   }
 } 
-
-// <----- Old function for reference----->
-// function detectFallingInRoad() {
-//   if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
-//     georgeInRoad = true
-//     livesCountdown()
-//     window.alert('Oh no!')
-//     cells[georgePosition].classList.remove('george')
-//     georgePosition = 59
-//     addSprite(georgePosition, 'george')
-//   } else {
-//     moveGeorgeRightWithBus()
-//   }
-// } 
 
 
 // <----- Testing Lives ----->
@@ -398,6 +386,7 @@ function livesCountdown() {
     clearInterval(intervalId)
     currentCountdown = 60
     countdownScreen.innerHTML = currentCountdown
+    removeSprite(georgeAtHomePosition, 'georgeAtHome')
     georgeAtHome = true
     outOfLives = true
     currentLives = 3
@@ -406,21 +395,11 @@ function livesCountdown() {
 }
 // livesCountdown()
 
-// function resetOnOutOfLives() {
-//   if (outOfLives) {
-//     window.addLeftBorderClass('You have run out of lives!')
-//     currentLives = 3
-//     livesScreen.innerHTML = currentLives
-//   }
-// }
-
 
 
 // <----- Testing getting home a family of Georges ----->
 
-
-// <----- Testing getting home ----->
-// Right now, code commented out below (both home and timer) works for one George sprite, but what if I want to get a family of George's home...
+// Right now, code below (both home and timer) works for one George sprite, but what if I want to get a family of George's home...
 
 // First, place bins to avoid so I can use some and every logic on home stretch
 
@@ -440,29 +419,21 @@ cells.forEach(cell => {
 
 // Then add trash cans to detection function above...
 
-
-
-// function createHome() {
-//   cells.filter(cell => {
-//     if (cell.innerHTML < width) {
-//       cell.classList.add('home')
-//     }
-//   })
-// }
-// createHome()
-
 let georgeAtHome = false
+let georgeAtHomePosition = null
 
 function arrivedAtHome() {
-  if (cells[georgePosition].classList.contains('home')) {
+  if (cells[georgePosition].classList.contains('home') && !outOfLives) {
       currentScore = currentScore + 500
       addCoffeePoints()
       currentScore.innerHTML = currentScore
       window.alert(`You did it! You got your first George home, now try another`)
+      georgeAtHomePosition = georgePosition
+      addSprite(georgeAtHomePosition, 'georgeAtHome')
       georgePosition = 59
       addSprite(georgePosition, 'george')  
       georgeAtHome = true
-    }
+  }
 }
 
 // call function in moveGeorge function above
@@ -495,6 +466,7 @@ function handleStartCountdown() {
       scoreScreen.innerHTML = currentScore
       currentLives = 3
       livesScreen.innerHTML = currentLives
+      removeSprite(georgeAtHomePosition, 'georgeAtHome')
       georgeAtHome = true
     }
   }, 500)
