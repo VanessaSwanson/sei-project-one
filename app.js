@@ -387,6 +387,9 @@ function livesCountdown() {
     currentCountdown = 60
     countdownScreen.innerHTML = currentCountdown
     removeSprite(georgeAtHomePosition, 'georgeAtHome')
+    removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+    georgeAtHomePosition = null
+    secondGeorgeAtHomePosition = null
     georgeAtHome = true
     outOfLives = true
     currentLives = 3
@@ -420,11 +423,37 @@ cells.forEach(cell => {
 // Then add trash cans to detection function above...
 
 let georgeAtHome = false
+
+console.log(cells)
+
+// didn't end up needing the some or every
+
+// let someHomeCellsAreGeorge = cells.some(cell => {
+//   return cell.classList.contains('home') && cell.classList.contains('georgeAtHome')
+// })
+// console.log(someHomeCellsAreGeorge)
+
+// let everyHomeCellIsGeorge = cells.every(cell => {
+//   return cell.classList.contains('home') && cell.classList.contains('georgeAtHome')
+// })
+// console.log(everyHomeCellIsGeorge)
+
 let georgeAtHomePosition = null
+let secondGeorgeAtHomePosition = null
+// let thirdGeorgeAtHomePosition = null
 
 function arrivedAtHome() {
-  if (cells[georgePosition].classList.contains('home') && !outOfLives) {
-      currentScore = currentScore + 500
+  // if (everyHomeCellIsGeorge) {
+  //   window.alert('You have won! Summer of George!')
+  //     currentCountdown = 60
+  //     countdownScreen.innerHTML = currentCountdown
+  //     currentScore = 0
+  //     scoreScreen.innerHTML = currentScore
+  //     currentLives = 3
+  //     livesScreen.innerHTML = currentLives
+  // } else 
+  if (cells[georgePosition].classList.contains('home') && !georgeAtHomePosition && !secondGeorgeAtHomePosition && !thirdGeorgeAtHomePosition) {
+    currentScore = currentScore + 500
       addCoffeePoints()
       currentScore.innerHTML = currentScore
       window.alert(`You did it! You got your first George home, now try another`)
@@ -433,8 +462,52 @@ function arrivedAtHome() {
       georgePosition = 59
       addSprite(georgePosition, 'george')  
       georgeAtHome = true
+  } else if (cells[georgePosition].classList.contains('home') && georgeAtHomePosition && !secondGeorgeAtHomePosition && !thirdGeorgeAtHomePosition) {
+    currentScore = currentScore + 500
+      addCoffeePoints()
+      currentScore.innerHTML = currentScore
+      window.alert(`You did it! You got your second George home, now try the final`)
+      secondGeorgeAtHomePosition = georgePosition
+      addSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')  
+      georgeAtHome = true
+  } else if (cells[georgePosition].classList.contains('home') && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+    currentScore = currentScore + 500
+      addCoffeePoints()
+      currentScore.innerHTML = currentScore
+      window.alert(`You did it! You got all your Georges home - summer of George! Your final score is ${currentScore}`)
+      clearInterval(intervalId)
+      currentCountdown = 60
+      countdownScreen.innerHTML = currentCountdown
+      currentScore = 0
+      scoreScreen.innerHTML = currentScore
+      currentLives = 3
+      livesScreen.innerHTML = currentLives
+      removeSprite(georgeAtHomePosition, 'georgeAtHome')
+      removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+      georgeAtHomePosition = null
+      secondGeorgeAtHomePosition = null
+      georgePosition = 59
+      addSprite(georgePosition, 'george')  
+      georgeAtHome = true
   }
 }
+
+// function arrivedAtHome() {
+//   // if (cells[georgePosition].classList.contains('home') && !outOfLives) {
+//   if (cells[georgePosition].classList.contains('home')) {
+//       currentScore = currentScore + 500
+//       addCoffeePoints()
+//       currentScore.innerHTML = currentScore
+//       window.alert(`You did it! You got your first George home, now try another`)
+//       georgeAtHomePosition = georgePosition
+//       addSprite(georgeAtHomePosition, 'georgeAtHome')
+//       georgePosition = 59
+//       addSprite(georgePosition, 'george')  
+//       georgeAtHome = true
+//   }
+// }
 
 // call function in moveGeorge function above
 
@@ -467,6 +540,9 @@ function handleStartCountdown() {
       currentLives = 3
       livesScreen.innerHTML = currentLives
       removeSprite(georgeAtHomePosition, 'georgeAtHome')
+      removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+      georgeAtHomePosition = null
+      secondGeorgeAtHomePosition = null
       georgeAtHome = true
     }
   }, 500)
