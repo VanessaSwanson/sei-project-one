@@ -301,14 +301,11 @@ function moveGeorgeRightWithBus() {
 
 moveGeorgeRightWithBus()
 
-console.log(georgePosition-1)
-
-
 // <----- Testing for collision ----->
 let georgeHasCollided = null
 
 function detectCollision() {
-  if (cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo') || cells[georgePosition].classList.contains('trash')) {
+  if ( cells[georgePosition].classList.contains('georgeAtHome') || cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo') || cells[georgePosition].classList.contains('trash')) {
       georgeHasCollided = true
       livesCountdown()
       addCoffeePoints()
@@ -443,16 +440,8 @@ let secondGeorgeAtHomePosition = null
 // let thirdGeorgeAtHomePosition = null
 
 function arrivedAtHome() {
-  // if (everyHomeCellIsGeorge) {
-  //   window.alert('You have won! Summer of George!')
-  //     currentCountdown = 60
-  //     countdownScreen.innerHTML = currentCountdown
-  //     currentScore = 0
-  //     scoreScreen.innerHTML = currentScore
-  //     currentLives = 3
-  //     livesScreen.innerHTML = currentLives
-  // } else 
-  if (cells[georgePosition].classList.contains('home') && !georgeAtHomePosition && !secondGeorgeAtHomePosition && !thirdGeorgeAtHomePosition) {
+  detectCollision()
+  if (cells[georgePosition].classList.contains('home') && !georgeAtHomePosition && !secondGeorgeAtHomePosition) {
     currentScore = currentScore + 500
       addCoffeePoints()
       currentScore.innerHTML = currentScore
@@ -462,7 +451,7 @@ function arrivedAtHome() {
       georgePosition = 59
       addSprite(georgePosition, 'george')  
       georgeAtHome = true
-  } else if (cells[georgePosition].classList.contains('home') && georgeAtHomePosition && !secondGeorgeAtHomePosition && !thirdGeorgeAtHomePosition) {
+  } else if (cells[georgePosition].classList.contains('home') && georgeAtHomePosition && !secondGeorgeAtHomePosition) {
     currentScore = currentScore + 500
       addCoffeePoints()
       currentScore.innerHTML = currentScore
