@@ -541,8 +541,7 @@ function handleStartCountdown() {
   intervalId = setInterval(() => {
     currentCountdown--
     countdownScreen.innerHTML = currentCountdown
-    console.log(countdownScreen.textContent)
-    if (currentCountdown === 0) {
+    if (currentCountdown === 0 && georgeAtHomePosition && secondGeorgeAtHomePosition) {
       clearInterval(intervalId)
       window.alert('Game over - you are out of time!')
       currentCountdown = 60
@@ -555,7 +554,35 @@ function handleStartCountdown() {
       removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
       georgeAtHomePosition = null
       secondGeorgeAtHomePosition = null
-      georgeAtHome = true
+      removeSprite(georgePosition, 'george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')
+    } else if (currentCountdown === 0 && georgeAtHomePosition) {
+      clearInterval(intervalId)
+      window.alert('Game over - you are out of time!')
+      currentCountdown = 60
+      countdownScreen.innerHTML = currentCountdown
+      currentScore = 0
+      scoreScreen.innerHTML = currentScore
+      currentLives = 3
+      livesScreen.innerHTML = currentLives
+      removeSprite(georgeAtHomePosition, 'georgeAtHome')
+      georgeAtHomePosition = null
+      removeSprite(georgePosition, 'george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')
+    } else if (currentCountdown === 0) {
+      clearInterval(intervalId)
+      window.alert('Game over - you are out of time!')
+      currentCountdown = 60
+      countdownScreen.innerHTML = currentCountdown
+      currentScore = 0
+      scoreScreen.innerHTML = currentScore
+      currentLives = 3
+      livesScreen.innerHTML = currentLives
+      removeSprite(georgePosition, 'george')
+      georgePosition = 59
+      addSprite(georgePosition, 'george')
     }
   }, 500)
 }
