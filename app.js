@@ -19,18 +19,6 @@ function createGrid() {
 }
 createGrid()
 
-// <----- Testing with start screen ----->
-const enterButton = document.querySelector('#enter')
-const startScreen = document.querySelector('#startScreen')
-const mainGameDisplay = document.querySelector('.main')
-
-function startScreenEnter() {
-  startScreen.style.display = 'none'
-  mainGameDisplay.style.display = 'flex'
-}
- enterButton.addEventListener('click', startScreenEnter)
-
-
 // <----- Testing border ----->
 // Really long code atm - will try to simplify at a later stage
 // In George movement function, added that once George is in a borderLeft or borderRight cell, he can't move left or right - stops him being able to travel over edge of rows
@@ -382,6 +370,10 @@ function detectFallingInRoad() {
 
 
 // <----- Testing Lives ----->
+
+let georgeAtHomePosition = null
+let secondGeorgeAtHomePosition = null
+
 let currentLives = 3
 let outOfLives = null
 const livesScreen = document.querySelector('#currentLives')
@@ -390,15 +382,35 @@ function livesCountdown() {
   if (currentLives > 1 && georgeHasCollided || georgeInRoad) {
     currentLives--
     livesScreen.innerHTML = currentLives 
-  } else {
+  } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+    removeSprite(georgeAtHomePosition, 'georgeAtHome')
+    removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+    window.alert('You have run out of lives!')
+    clearInterval(intervalId)
+    currentCountdown = 60
+    countdownScreen.innerHTML = currentCountdown
+    georgeAtHome = true
+    outOfLives = true
+    currentLives = 3
+    livesScreen.innerHTML = currentLives 
+    georgeAtHomePosition = null 
+    secondGeorgeAtHomePosition = null 
+  } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition) {
     window.alert('You have run out of lives!')
     clearInterval(intervalId)
     currentCountdown = 60
     countdownScreen.innerHTML = currentCountdown
     removeSprite(georgeAtHomePosition, 'georgeAtHome')
-    removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
-    georgeAtHomePosition = null
-    secondGeorgeAtHomePosition = null
+    georgeAtHome = true
+    outOfLives = true
+    currentLives = 3
+    livesScreen.innerHTML = currentLives 
+    georgeAtHomePosition = null 
+  } else {
+    window.alert('You have run out of lives!')
+    clearInterval(intervalId)
+    currentCountdown = 60
+    countdownScreen.innerHTML = currentCountdown
     georgeAtHome = true
     outOfLives = true
     currentLives = 3
@@ -447,8 +459,7 @@ console.log(cells)
 // })
 // console.log(everyHomeCellIsGeorge)
 
-let georgeAtHomePosition = null
-let secondGeorgeAtHomePosition = null
+
 // let thirdGeorgeAtHomePosition = null
 
 function arrivedAtHome() {
