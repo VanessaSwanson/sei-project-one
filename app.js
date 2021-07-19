@@ -339,24 +339,51 @@ createRoad()
 // }
 // createRoad()
 
+// <----- New fall in road function to reset lives ----->
+// Annoyingly having to repeat code in this function, but only way I could get it to work!
+
 let georgeInRoad = null
 
 function detectFallingInRoad() {
   if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
     georgeInRoad = true
+  }
+  if (currentLives > 1 && georgeInRoad) {
     livesCountdown()
     window.alert('Oh no!')
     cells[georgePosition].classList.remove('george')
+    georgePosition = 59
+    addSprite(georgePosition, 'george')
+  } else if (currentLives <=1 && georgeInRoad) {
+    window.alert('You have run out of lives!')
+    outOfLives = true
+    currentLives = 3
+    livesScreen.innerHTML = currentLives
     georgePosition = 59
     addSprite(georgePosition, 'george')
   } else {
     moveGeorgeRightWithBus()
   }
 } 
-// detectFallingInRoad()
+
+// <----- Old function for reference----->
+// function detectFallingInRoad() {
+//   if (cells[georgePosition].classList.contains('road') && !cells[georgePosition].classList.contains('bus')) {
+//     georgeInRoad = true
+//     livesCountdown()
+//     window.alert('Oh no!')
+//     cells[georgePosition].classList.remove('george')
+//     georgePosition = 59
+//     addSprite(georgePosition, 'george')
+//   } else {
+//     moveGeorgeRightWithBus()
+//   }
+// } 
+
 
 // <----- Testing Lives ----->
 let currentLives = 3
+let outOfLives = null
 const livesScreen = document.querySelector('#currentLives')
 
 function livesCountdown() {
@@ -366,11 +393,20 @@ function livesCountdown() {
   } else {
     window.alert('You have run out of lives!')
     georgeAtHome = true
+    outOfLives = true
     currentLives = 3
     livesScreen.innerHTML = currentLives 
   }
 }
 // livesCountdown()
+
+// function resetOnOutOfLives() {
+//   if (outOfLives) {
+//     window.addLeftBorderClass('You have run out of lives!')
+//     currentLives = 3
+//     livesScreen.innerHTML = currentLives
+//   }
+// }
 
 
 
@@ -471,42 +507,6 @@ function handleStartCountdown() {
 }
 
 startButton.addEventListener('click', handleStartCountdown)
-
-
-// <----- Older versions of move functions for reference because I managed to do these without hard coding ----->
-
-// function moveSoupNazi() {
-//   setInterval(() => {
-//     if (currentSoupNaziPosition === soupNaziPosition + (width - 1)) {
-//       removeSprite(currentSoupNaziPosition, 'soup-nazi')
-//       currentSoupNaziPosition = soupNaziPosition
-//       addSprite(currentSoupNaziPosition, 'soup-nazi')
-//     } else if (currentSoupNaziPosition < soupNaziPosition + (width - 1)) {
-//       removeSprite(soupNaziPosition, 'soup-nazi')
-//       removeSprite(currentSoupNaziPosition, 'soup-nazi')
-//       currentSoupNaziPosition++ 
-//       addSprite(currentSoupNaziPosition, 'soup-nazi')
-//     }
-//   }, 700)
-// }
-// moveSoupNazi()
-
-// function moveUncleLeo() {
-//   setInterval(() => {
-//     if (currentUncleLeoPosition === uncleLeoPosition - (width - 1)) {
-//       removeSprite(currentUncleLeoPosition, 'uncle-leo')
-//       currentUncleLeoPosition = uncleLeoPosition
-//       addSprite(currentUncleLeoPosition, 'uncle-leo')
-//     } else if (currentUncleLeoPosition > uncleLeoPosition - (width - 1)) {
-//       removeSprite(uncleLeoPosition, 'uncle-leo')
-//       removeSprite(currentUncleLeoPosition, 'uncle-leo')
-//       currentUncleLeoPosition--
-//       addSprite(currentUncleLeoPosition, 'uncle-leo')
-//     }
-//   }, 1000)
-// }
-// moveUncleLeo()
-
 
 
 

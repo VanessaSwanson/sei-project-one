@@ -109,6 +109,12 @@ body {
   background-size: contain;
   background-position: center;
 }
+.georgeAtHome {
+  background-image: url(./design-elements/george.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
 .busBackdrop {
   background-image: url(./design-elements/busBackdrop.png);
   background-repeat: no-repeat;
