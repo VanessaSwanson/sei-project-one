@@ -108,6 +108,7 @@ function removeSprite(position, assignedClass) {
 console.log(cells[georgePosition].classList)
 
 function moveGeorge(event) {
+  if (gameisRunning) {
 
   // removeSprite function so George is only in current position and not last place he moved from
   removeSprite(georgePosition, 'george')
@@ -155,9 +156,11 @@ function moveGeorge(event) {
         addCoffeePoints()
       }
       break
+    
   }
   // Then you want to add george class to new cell you enter!
   addSprite(georgePosition, 'george')
+}
 }
 
 // Then an event to listen out for the arrow buttons
@@ -363,6 +366,7 @@ function detectFallingInRoad() {
     livesScreen.innerHTML = currentLives
     georgePosition = 59
     addSprite(georgePosition, 'george')
+    gameisRunning = false
   } else {
     moveGeorgeRightWithBus()
   }
@@ -395,6 +399,7 @@ function livesCountdown() {
     livesScreen.innerHTML = currentLives 
     georgeAtHomePosition = null 
     secondGeorgeAtHomePosition = null 
+    gameisRunning = false
   } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition) {
     window.alert('You have run out of lives!')
     clearInterval(intervalId)
@@ -406,6 +411,7 @@ function livesCountdown() {
     currentLives = 3
     livesScreen.innerHTML = currentLives 
     georgeAtHomePosition = null 
+    gameisRunning = false
   } else {
     window.alert('You have run out of lives!')
     clearInterval(intervalId)
@@ -415,6 +421,7 @@ function livesCountdown() {
     outOfLives = true
     currentLives = 3
     livesScreen.innerHTML = currentLives 
+    gameisRunning = false
   }
 }
 // livesCountdown()
@@ -503,6 +510,7 @@ function arrivedAtHome() {
       georgePosition = 59
       addSprite(georgePosition, 'george')  
       georgeAtHome = true
+      gameisRunning = false
   }
 }
 
@@ -535,12 +543,14 @@ const startButton = document.querySelector('.start')
 const countdownScreen = document.querySelector('#timeRemaining')
 console.log(countdownScreen.innerHTML)
 let intervalId = null
+let gameisRunning = null
 
 function handleStartCountdown() {
   if (currentCountdown !== 60 && !cells[georgePosition].classList.contains('home')) return
   intervalId = setInterval(() => {
     currentCountdown--
     countdownScreen.innerHTML = currentCountdown
+    gameisRunning = true
     if (currentCountdown === 0 && georgeAtHomePosition && secondGeorgeAtHomePosition) {
       clearInterval(intervalId)
       window.alert('Game over - you are out of time!')
@@ -557,6 +567,7 @@ function handleStartCountdown() {
       removeSprite(georgePosition, 'george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
+      gameisRunning = false
     } else if (currentCountdown === 0 && georgeAtHomePosition) {
       clearInterval(intervalId)
       window.alert('Game over - you are out of time!')
@@ -571,6 +582,7 @@ function handleStartCountdown() {
       removeSprite(georgePosition, 'george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
+      gameisRunning = false
     } else if (currentCountdown === 0) {
       clearInterval(intervalId)
       window.alert('Game over - you are out of time!')
@@ -583,6 +595,7 @@ function handleStartCountdown() {
       removeSprite(georgePosition, 'george')
       georgePosition = 59
       addSprite(georgePosition, 'george')
+      gameisRunning = false
     }
   }, 500)
 }
