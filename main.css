@@ -2,13 +2,14 @@
   box-sizing: border-box;
 }
 .main {
-  /* display: flex; */
+  display: flex;
   justify-content: space-around;
   align-items: center;
-  display: none;
+  /* display: none; */
 }
 #startScreen {
-  display: flex;
+  display: none;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   background-image: url(./design-elements/cafe.png);
@@ -97,7 +98,7 @@ h1 {
 .grid div {
   border: 1px solid black;
   height: 11.11%;
-  width: 14%;
+  width: 9%;
 }
 
 /* <----- Basic test sprites -----> */
