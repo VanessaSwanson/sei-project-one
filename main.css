@@ -107,6 +107,7 @@ h1 {
   background-image: url(./design-elements/soup-nazi.jpg);
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 
 /* Have created two taxi classes so two can travel together to make it easier to jump on them */
@@ -128,9 +129,22 @@ h1 {
   background-image: url(./design-elements/uncle-leo.jpg);
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 
-.bus {
+.busOne {
+  background-image: url(./design-elements/bus.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.busTwo {
+  background-image: url(./design-elements/bus.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.busThree {
   background-image: url(./design-elements/bus.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -167,11 +181,13 @@ h1 {
   background-image: url(./design-elements/busBackdrop.png);
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 .taxiBackdrop {
   background-image: url(./design-elements/taxiBackdrop.png);
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
 }
 
 
