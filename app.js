@@ -277,7 +277,6 @@ function moveGeorge(event) {
 }
 window.addEventListener('keyup', moveGeorge)
 
-
 // <----- Coffee sprites and points ----->
 
 // Only want the coffee to appear in safe spaces
@@ -389,48 +388,44 @@ function moveSusanLeft() {
 }
 moveSusanLeft()
 
-// const results = []
 
-//  for (let i = 1; i < height; i++) {
-//   result = width * i - 1
-//   results.push(result)
-//   console.log(result)
-//   console.log(results)
-// }
+let georgeOnFloat = null
 
 function moveBusOneRight() {
   currentBusOnePosition = busOnePosition.map(bus => {
     setInterval(() => {
       if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
-        removeSprite(bus, 'busOne')
+        georgeOnFloat = true
+        // removeSprite(bus, 'busOne')
         removeSprite(bus, 'george')
-        bus = bus - (width - 1)
-        georgePosition = bus
-        georgePosition++
-        console.log('hello')
-        // currentBusOnePosition.push(bus)
-        addSprite(bus, 'busOne')
+        // removeSprite(bus, 'busBackdrop')
+        // bus = bus - (width - 1)
+        // georgePosition++
+        // addSprite(bus, 'busOne')
         addSprite(georgePosition, 'busBackdrop')
+        window.alert('Oh no you have gone over the edge!')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        removeSprite(georgePosition, 'busBackdrop')
+        addSprite(georgePosition, 'busOne')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
+        georgeOnFloat = true
         removeSprite(bus, 'busOne')
         removeSprite(bus, 'george')
         removeSprite(georgePosition, 'busBackdrop')
         bus++
-        // georgePosition = bus
         georgePosition++
-        console.log('hello')
-        // currentBusOnePosition.push(bus)
         addSprite(bus, 'busOne')
         addSprite(georgePosition, 'busBackdrop') 
       } else if (bus === width * 2 - 1 || bus === width * 4 - 1) {
         removeSprite(bus, 'busOne')
         bus = bus - (width - 1)
-        // currentBusTwoPosition.push(bus)
         addSprite(bus, 'busOne')
       } else if (bus < width * 2 -1 || bus < width * 4 - 1) {
         removeSprite(bus, 'busOne')
         bus++
-        // currentBusTwoPosition.push(bus)
         addSprite(bus, 'busOne')
       }
     }, 1500)
@@ -438,46 +433,41 @@ function moveBusOneRight() {
 }
 moveBusOneRight()
 
-function checkOnBus() {
-  if (georgePosition === currentBusOnePosition){
-    console.log('George is on bus one')
-  }
-}
-checkOnBus()
-
 function moveBusTwoRight() {
   currentBusTwoPosition = busTwoPosition.map(bus => {
     setInterval(() => {
       if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
-        removeSprite(bus, 'busTwo')
+        georgeOnFloat = true
+        // removeSprite(bus, 'busTwo')
         removeSprite(bus, 'george')
-        bus = bus - (width - 1)
-        georgePosition = bus
-        georgePosition++
-        console.log('hello')
-        // currentBusOnePosition.push(bus)
-        addSprite(bus, 'busTwo')
+        // removeSprite(bus, 'busBackdrop')
+        // bus = bus - (width - 1)
+        // georgePosition++
+        // addSprite(bus, 'busTwo')
         addSprite(georgePosition, 'busBackdrop')
+        window.alert('Oh no you have gone over the edge!')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        removeSprite(georgePosition, 'busBackdrop')
+        addSprite(georgePosition, 'busTwo')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
+        georgeOnFloat = true
         removeSprite(bus, 'busTwo')
         removeSprite(bus, 'george')
         removeSprite(georgePosition, 'busBackdrop')
         bus++
-        // georgePosition = bus
         georgePosition++
-        console.log('hello')
-        // currentBusOnePosition.push(bus)
         addSprite(bus, 'busTwo')
         addSprite(georgePosition, 'busBackdrop') 
       } else if (bus === width * 2 - 1 || bus === width * 4 - 1) {
         removeSprite(bus, 'busTwo')
         bus = bus - (width - 1)
-        // currentBusTwoPosition.push(bus)
         addSprite(bus, 'busTwo')
       } else if (bus < width * 2 -1 || bus < width * 4 - 1) {
         removeSprite(bus, 'busTwo')
         bus++
-        // currentBusTwoPosition.push(bus)
         addSprite(bus, 'busTwo')
       }
     }, 1500)
@@ -489,23 +479,28 @@ function moveBusThreeRight() {
   currentBusThreePosition = busThreePosition.map(bus => {
     setInterval(() => {
       if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
-        removeSprite(bus, 'busThree')
+        georgeOnFloat = true
+        // removeSprite(bus, 'busThree')
         removeSprite(bus, 'george')
-        removeSprite(bus, 'busBackdrop')
-        bus = bus - (width - 1)
-        georgePosition = bus
-        georgePosition++
-        console.log('hello')
-        addSprite(bus, 'busThree')
+        // removeSprite(bus, 'busBackdrop')
+        // bus = bus - (width - 1)
+        // georgePosition++
+        // addSprite(bus, 'busThree')
         addSprite(georgePosition, 'busBackdrop')
+        window.alert('Oh no you have gone over the edge!')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        removeSprite(georgePosition, 'busBackdrop')
+        addSprite(georgePosition, 'busThree')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
+        georgeOnFloat = true
         removeSprite(bus, 'busThree')
         removeSprite(bus, 'george')
         removeSprite(georgePosition, 'busBackdrop')
         bus++
-        // georgePosition = bus
         georgePosition++
-        console.log('hello')
         addSprite(bus, 'busThree')
         addSprite(georgePosition, 'busBackdrop') 
       } else if (bus === width * 2 - 1 || bus === width * 4 - 1) {
@@ -526,23 +521,28 @@ function moveTaxiOneLeft() {
   currentTaxiOnePosition = taxiOnePosition.map(taxi => {
     setInterval(() => {
       if (taxi === width * 2  && georgePosition === taxi) {
-        removeSprite(taxi, 'taxiOne')
-        removeSprite(taxi, 'george')
-        removeSprite(taxi, 'taxiBackdrop')
-        taxi = (width * 3) - 1
-        georgePosition = taxi
-        georgePosition--
-        console.log('hello')
-        addSprite(taxi, 'taxiOne')
+        georgeOnFloat = true
+        // removeSprite(taxi, 'taxiOne')
+        // removeSprite(taxi, 'george')
+        // removeSprite(taxi, 'taxiBackdrop')
+        // taxi = (width * 3) - 1
+        // georgePosition = taxi
+        // georgePosition--
+        // addSprite(taxi, 'taxiOne')
         addSprite(georgePosition, 'taxiBackdrop')
+        window.alert('Oh no you have gone over the edge!')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        removeSprite(georgePosition, 'taxiBackdrop')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
       } else if (taxi > width * 2 && georgePosition === taxi) {
+        georgeOnFloat = true
         removeSprite(taxi, 'taxiOne')
         removeSprite(taxi, 'george')
         removeSprite(georgePosition, 'taxiBackdrop')
         taxi--
-        // georgePosition = taxi
         georgePosition--
-        console.log('hello')
         addSprite(taxi, 'taxiOne')
         addSprite(georgePosition, 'taxiBackdrop') 
       } else if (taxi === width * 2) {
@@ -563,23 +563,29 @@ function moveTaxiTwoLeft() {
   currentTaxiTwoPosition = taxiTwoPosition.map(taxi => {
     setInterval(() => {
       if (taxi === width * 2  && georgePosition === taxi) {
-        removeSprite(taxi, 'taxiTwo')
-        removeSprite(taxi, 'george')
-        removeSprite(taxi, 'taxiBackdrop')
-        taxi = (width * 3) - 1
-        georgePosition = taxi
-        georgePosition--
-        console.log('hello')
-        addSprite(taxi, 'taxiTwo')
+        georgeOnFloat = true
+        // removeSprite(taxi, 'taxiTwo')
+        // removeSprite(taxi, 'george')
+        // removeSprite(taxi, 'taxiBackdrop')
+        // taxi = (width * 3) - 1
+        // georgePosition = taxi
+        // georgePosition--
+        // addSprite(taxi, 'taxiTwo')
         addSprite(georgePosition, 'taxiBackdrop')
+        window.alert('Oh no you have gone over the edge!')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        removeSprite(georgePosition, 'taxiBackdrop')
+        // addSprite(georgePosition, 'taxiTwo')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
       } else if (taxi > width * 2 && georgePosition === taxi) {
+        georgeOnFloat = true
         removeSprite(taxi, 'taxiTwo')
         removeSprite(taxi, 'george')
         removeSprite(georgePosition, 'taxiBackdrop')
         taxi--
-        // georgePosition = taxi
         georgePosition--
-        console.log('hello')
         addSprite(taxi, 'taxiTwo')
         addSprite(georgePosition, 'taxiBackdrop') 
       } else if (taxi === width * 2) {
@@ -595,6 +601,35 @@ function moveTaxiTwoLeft() {
   })
 }
 moveTaxiTwoLeft()
+
+// <----- Testing function to make George lose a life if he moves over edge while on a float ----->
+function georgeOverEdgeWhileOnFloat(event) {
+  switch(event.keyCode) {
+    case 39:
+      if (georgeOnFloat && cells[georgePosition].classList.contains('borderRight')) {
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        window.alert('Oh no! You went off the edge')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+      }
+    break
+    case 37:
+      if (georgeOnFloat && cells[georgePosition].classList.contains('borderLeft')) {
+        removeSprite(georgePosition, 'taxiBackdrop')
+        removeSprite(georgePosition, 'george')
+        currentLives = currentLives - 1
+        livesScreen.innerHTML = currentLives
+        window.alert('Oh no! You went off the edge')
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+      }
+      break
+    } 
+}
+window.addEventListener('keyup', georgeOverEdgeWhileOnFloat)
 
 
 // <----- Testing for collision ----->
