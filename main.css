@@ -2,14 +2,14 @@
   box-sizing: border-box;
 }
 .main {
-  display: flex;
+  /* display: flex; */
   justify-content: space-around;
   align-items: center;
-  /* display: none; */
+  display: none;
 }
 #startScreen {
-  display: none;
-  /* display: flex; */
+  /* display: none; */
+  display: flex;
   justify-content: center;
   align-items: center;
   background-image: url(./design-elements/cafe.png);
@@ -104,7 +104,7 @@ h1 {
 /* <----- Basic test sprites -----> */
 
 .soup-nazi {
-  background-image: url(./design-elements/soup-nazi.jpg);
+  background-image: url(./design-elements/soup-nazi.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -117,7 +117,6 @@ h1 {
   background-size: contain;
   background-position: center;
 }
-
 .taxiTwo {
   background-image: url(./design-elements/taxi.png);
   background-repeat: no-repeat;
@@ -126,12 +125,17 @@ h1 {
 }
 
 .uncle-leo {
-  background-image: url(./design-elements/uncle-leo.jpg);
+  background-image: url(./design-elements/uncle-leo.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
-
+.susan {
+  background-image: url(./design-elements/susan.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
 .busOne {
   background-image: url(./design-elements/bus.png);
   background-repeat: no-repeat;
@@ -145,6 +149,12 @@ h1 {
   background-position: center;
 }
 .busThree {
+  background-image: url(./design-elements/bus.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.busFour {
   background-image: url(./design-elements/bus.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -166,13 +176,13 @@ h1 {
 
 /* having George come last in order means he shows above other sprites */
 .george {
-  background-image: url(./design-elements/george.jpg);
+  background-image: url(./design-elements/george.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .georgeAtHome {
-  background-image: url(./design-elements/george.jpg);
+  background-image: url(./design-elements/george.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
