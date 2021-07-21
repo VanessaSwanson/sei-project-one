@@ -137,46 +137,38 @@ const taxiOnePosition = [
   (width * 2)  + Math.ceil(width/3), 
   (width * 2)  + Math.ceil(width/3 * 2)
 ]
-let currentTaxiOnePosition = [
-  width * 2,
-  (width * 2)  + Math.ceil(width/3), 
-  (width * 2)  + Math.ceil(width/3 * 2)
-] 
+let currentTaxiOnePosition = [] 
 const taxiTwoPosition = [
   taxiOnePosition[0]+1, 
   taxiOnePosition[1]+1,
   taxiOnePosition[2]+1
 ]
-let currentTaxiTwoPosition = [
-  taxiOnePosition[0]+1, 
-  taxiOnePosition[1]+1,
-  taxiOnePosition[2]+1
-]
+let currentTaxiTwoPosition = []
 
 // BUSES
-const busOnePosition = [
+// Realised that reordering the buses stops George going straight to the front and allows you to move along the bus train!
+const busThreePosition = [
   width, 
   width + Math.ceil(width/2), 
   width * 3, 
   (width * 3) + Math.ceil(width/2)
 ]
-let currentBusOnePosition = [
-]
+let currentBusThreePosition = []
 const busTwoPosition = [
-  busOnePosition[0]+1, 
-  busOnePosition[1]+1, 
-  busOnePosition[2]+1, 
-  busOnePosition[3]+1
+  busThreePosition[0]+1, 
+  busThreePosition[1]+1, 
+  busThreePosition[2]+1, 
+  busThreePosition[3]+1
 ]
 let currentBusTwoPosition = [
 ]
-const busThreePosition = [
-  busOnePosition[0]+2, 
-  busOnePosition[1]+2, 
-  busOnePosition[2]+2, 
-  busOnePosition[3]+2
+const busOnePosition = [
+  busThreePosition[0]+2, 
+  busThreePosition[1]+2, 
+  busThreePosition[2]+2, 
+  busThreePosition[3]+2,
 ]
-let currentBusThreePosition = [
+let currentBusOnePosition = [
 ]
 
 
@@ -499,11 +491,11 @@ function moveBusThreeRight() {
       if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
         removeSprite(bus, 'busThree')
         removeSprite(bus, 'george')
+        removeSprite(bus, 'busBackdrop')
         bus = bus - (width - 1)
         georgePosition = bus
         georgePosition++
         console.log('hello')
-        // currentBusOnePosition.push(bus)
         addSprite(bus, 'busThree')
         addSprite(georgePosition, 'busBackdrop')
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
@@ -514,18 +506,15 @@ function moveBusThreeRight() {
         // georgePosition = bus
         georgePosition++
         console.log('hello')
-        // currentBusOnePosition.push(bus)
         addSprite(bus, 'busThree')
         addSprite(georgePosition, 'busBackdrop') 
       } else if (bus === width * 2 - 1 || bus === width * 4 - 1) {
         removeSprite(bus, 'busThree')
         bus = bus - (width - 1)
-        // currentbusThreePosition.push(bus)
         addSprite(bus, 'busThree')
       } else if (bus < width * 2 -1 || bus < width * 4 - 1) {
         removeSprite(bus, 'busThree')
         bus++
-        // currentbusThreePosition.push(bus)
         addSprite(bus, 'busThree')
       }
     }, 1500)
@@ -533,71 +522,30 @@ function moveBusThreeRight() {
 }
 moveBusThreeRight()
 
-// function moveBusOneRight() {
-//   currentBusOnePosition = busOnePosition.map(bus => {
-//     setInterval(() => {
-//       if (bus === width * 2 - 1 || bus === width * 4 - 1) {
-//         removeSprite(bus, 'busOne')
-//         bus = bus - (width - 1)
-//         // currentBusOnePosition.push(bus)
-//         addSprite(bus, 'busOne')
-//       } else if (bus < width * 2 -1 || bus < width * 4 - 1) {
-//         removeSprite(bus, 'busOne')
-//         bus++
-//         // currentBusOnePosition.push(bus)
-//         addSprite(bus, 'busOne')
-//       }
-//     }, 1500)
-//   })
-// }
-// moveBusOneRight()
-
-// function moveBusTwoRight() {
-//   currentBusTwoPosition = busTwoPosition.map(bus => {
-//     setInterval(() => {
-//       if (bus === width * 2 - 1 || bus === width * 4 - 1) {
-//         removeSprite(bus, 'busTwo')
-//         bus = bus - (width - 1)
-//         // currentBusTwoPosition.push(bus)
-//         addSprite(bus, 'busTwo')
-//       } else if (bus < width * 2 -1 || bus < width * 4 - 1) {
-//         removeSprite(bus, 'busTwo')
-//         bus++
-//         // currentBusTwoPosition.push(bus)
-//         addSprite(bus, 'busTwo')
-//       }
-//     }, 1500)
-//   })
-// }
-// moveBusTwoRight()
-
-// function moveBusThreeRight() {
-//   currentBusThreePosition = busThreePosition.map(bus => {
-//     setInterval(() => {
-//       if (bus === width * 2 - 1 || bus === width * 4 - 1) {
-//         removeSprite(bus, 'busThree')
-//         bus = bus - (width - 1)
-//         addSprite(bus, 'busThree')
-//         // currentBusThreePosition.push(bus)
-//         console.log(currentBusThreePosition)
-//         console.log(bus)
-//       } else if (bus < width * 2 -1 || bus < width * 4 - 1) {
-//         removeSprite(bus, 'busThree')
-//         bus++
-//         addSprite(bus, 'busThree')
-//         // currentBusThreePosition.push(bus)
-//         console.log(currentBusThreePosition)
-//         console.log(bus)
-//       }
-//     }, 1500)
-//   })
-// }
-// moveBusThreeRight()
-
 function moveTaxiOneLeft() {
   currentTaxiOnePosition = taxiOnePosition.map(taxi => {
     setInterval(() => {
-      if (taxi === width * 2) {
+      if (taxi === width * 2  && georgePosition === taxi) {
+        removeSprite(taxi, 'taxiOne')
+        removeSprite(taxi, 'george')
+        removeSprite(taxi, 'taxiBackdrop')
+        taxi = (width * 3) - 1
+        georgePosition = taxi
+        georgePosition--
+        console.log('hello')
+        addSprite(taxi, 'taxiOne')
+        addSprite(georgePosition, 'taxiBackdrop')
+      } else if (taxi > width * 2 && georgePosition === taxi) {
+        removeSprite(taxi, 'taxiOne')
+        removeSprite(taxi, 'george')
+        removeSprite(georgePosition, 'taxiBackdrop')
+        taxi--
+        // georgePosition = taxi
+        georgePosition--
+        console.log('hello')
+        addSprite(taxi, 'taxiOne')
+        addSprite(georgePosition, 'taxiBackdrop') 
+      } else if (taxi === width * 2) {
         removeSprite(taxi, 'taxiOne')
         taxi = (width * 3) - 1
         addSprite(taxi, 'taxiOne')
@@ -614,7 +562,27 @@ moveTaxiOneLeft()
 function moveTaxiTwoLeft() {
   currentTaxiTwoPosition = taxiTwoPosition.map(taxi => {
     setInterval(() => {
-      if (taxi === width * 2) {
+      if (taxi === width * 2  && georgePosition === taxi) {
+        removeSprite(taxi, 'taxiTwo')
+        removeSprite(taxi, 'george')
+        removeSprite(taxi, 'taxiBackdrop')
+        taxi = (width * 3) - 1
+        georgePosition = taxi
+        georgePosition--
+        console.log('hello')
+        addSprite(taxi, 'taxiTwo')
+        addSprite(georgePosition, 'taxiBackdrop')
+      } else if (taxi > width * 2 && georgePosition === taxi) {
+        removeSprite(taxi, 'taxiTwo')
+        removeSprite(taxi, 'george')
+        removeSprite(georgePosition, 'taxiBackdrop')
+        taxi--
+        // georgePosition = taxi
+        georgePosition--
+        console.log('hello')
+        addSprite(taxi, 'taxiTwo')
+        addSprite(georgePosition, 'taxiBackdrop') 
+      } else if (taxi === width * 2) {
         removeSprite(taxi, 'taxiTwo')
         taxi = (width * 3) - 1
         addSprite(taxi, 'taxiTwo')
@@ -628,158 +596,6 @@ function moveTaxiTwoLeft() {
 }
 moveTaxiTwoLeft()
 
-// <----- Making George move with the buses and taxis ----->
-
-// function moveGeorgeRight() {
-//   setInterval(() => {
-//     if (georgePosition === width * 2 -1 || georgePosition === width * 4 -1) {
-//         removeSprite(georgePosition, 'george')
-//         removeSprite(georgePosition, 'busBackdrop')
-//         georgePosition = georgePosition - (width - 1)
-//         addSprite(georgePosition, 'busBackdrop')
-//       } else if (georgePosition < width * 2 - 1 || georgePosition < width * 4 - 1 ) {
-//         removeSprite(georgePosition, 'george')
-//         removeSprite(georgePosition, 'busBackdrop')
-//         georgePosition++
-//         addSprite(georgePosition, 'busBackdrop')
-//       }
-//   }, 1500)
-// }
-
-// function moveGeorgeRightWithBusOne() {
-//   currentBusOnePosition.forEach(bus=> {
-//     console.log(bus)
-//     console.log(georgePosition)
-//       if (georgePosition === bus) {
-//         removeSprite(georgePosition, 'george')
-//         removeSprite(georgePosition, 'busBackdrop')
-//         georgePosition++
-//         addSprite(georgePosition, 'busBackdrop')
-//       }
-//   })
-// }
-// moveGeorgeRightWithBusOne()
-
-// function moveGeorgeRightWithBusTwo() {
-//   currentBusTwoPosition.forEach(bus=> {
-//       console.log(bus)
-//       console.log(georgePosition)
-//       if (georgePosition === bus) {
-//         removeSprite(georgePosition, 'george')
-//         removeSprite(georgePosition, 'busBackdrop')
-//         georgePosition++
-//         addSprite(georgePosition, 'busBackdrop')
-//       }
-//   })
-// }
-// moveGeorgeRightWithBusTwo()
-
-// function moveGeorgeRightWithBusThree() {
-//   currentBusTwoPosition.forEach(bus=> {
-//       console.log(bus)
-//       console.log(georgePosition)
-//       if (georgePosition === bus) {
-//         removeSprite(georgePosition, 'george')
-//         removeSprite(georgePosition, 'busBackdrop')
-//         georgePosition++
-//         addSprite(georgePosition, 'busBackdrop')
-//       }
-//   })
-// }
-// moveGeorgeRightWithBusThree()
-
-
-// function moveGeorgeRightWithBusOne() {
-//   setInterval(() => {
-//     if (georgePosition === width * 2 -1 && cells[georgePosition].classList.contains('busOne') || georgePosition === width * 4 -1 && cells[georgePosition].classList.contains('busOne')) {
-//       removeSprite(georgePosition, 'george')
-//       removeSprite(georgePosition, 'busBackdrop')
-//       georgePosition = georgePosition - (width - 1)
-//       cells[georgePosition].classList.add('george')
-//       addSprite(georgePosition, 'busBackdrop')
-//     } else if (georgePosition < width * 2 - 1 && cells[georgePosition].classList.contains('busOne') || georgePosition < width * 4 - 1 && cells[georgePosition].classList.contains('busOne')) {
-//       removeSprite(georgePosition, 'george')
-//       removeSprite(georgePosition, 'busBackdrop')
-//       georgePosition++
-//       cells[georgePosition].classList.add('george')
-//       addSprite(georgePosition, 'busBackdrop')
-//     } 
-//   }, 1500)
-// }
-// moveGeorgeRightWithBusOne()
-
-// function moveGeorgeRightWithBusTwo() {
-//   setInterval(() => {
-//     if (georgePosition === width * 2 -1 && cells[georgePosition].classList.contains('busTwo') || georgePosition === width * 4 -1 && cells[georgePosition].classList.contains('busTwo')) {
-//       removeSprite(georgePosition, 'george')
-//       removeSprite(georgePosition, 'busBackdrop')
-//       georgePosition = georgePosition - (width - 1)
-//       cells[georgePosition].classList.add('george')
-//       addSprite(georgePosition, 'busBackdrop')
-//     } else if (georgePosition < width * 2 - 1 && cells[georgePosition].classList.contains('busTwo') || georgePosition < width * 4 - 1 && cells[georgePosition].classList.contains('busTwo')) {
-//       removeSprite(georgePosition, 'george')
-//       removeSprite(georgePosition, 'busBackdrop')
-//       georgePosition++
-//       cells[georgePosition].classList.add('george')
-//       addSprite(georgePosition, 'busBackdrop')
-//     } 
-//   }, 1500)
-// }
-// moveGeorgeRightWithBusTwo()
-
-// function moveGeorgeRightWithBusThree() {
-//   setInterval(() => {
-//     if (georgePosition === width * 2 -1 && cells[georgePosition].classList.contains('busThree') || georgePosition === width * 4 -1 && cells[georgePosition].classList.contains('busThree')) {
-//       removeSprite(georgePosition, 'george')
-//       removeSprite(georgePosition, 'busBackdrop')
-//       georgePosition = georgePosition - (width - 1)
-//       cells[georgePosition].classList.add('george')
-//       addSprite(georgePosition, 'busBackdrop')
-//     } else if (georgePosition < width * 2 - 1 && cells[georgePosition].classList.contains('busThree') || georgePosition < width * 4 - 1 && cells[georgePosition].classList.contains('busThree')) {
-//       removeSprite(georgePosition, 'george')
-//       removeSprite(georgePosition, 'busBackdrop')
-//       georgePosition++
-//       cells[georgePosition].classList.add('george')
-//       addSprite(georgePosition, 'busBackdrop')
-//     } 
-//   }, 1500)
-// }
-// moveGeorgeRightWithBusThree()
-
-
-function moveGeorgeLeftWithTaxiOne() {
-  setInterval(() => {
-    if (georgePosition === width * 2 && cells[georgePosition].classList.contains('taxiOne')) {
-      removeSprite(georgePosition, 'george')
-      removeSprite(georgePosition, 'taxiBackdrop')
-      georgePosition = (width * 3) - 1
-      addSprite(georgePosition, 'taxiBackdrop')
-    } else if (georgePosition > width * 2 && cells[georgePosition].classList.contains('taxiOne')) {
-      removeSprite(georgePosition, 'george')
-      removeSprite(georgePosition, 'taxiBackdrop')
-      georgePosition--
-      addSprite(georgePosition, 'taxiBackdrop')
-    } 
-  }, 1500)
-}
-moveGeorgeLeftWithTaxiOne()
-
-function moveGeorgeLeftWithTaxiTwo() {
-  setInterval(() => {
-    if (georgePosition === width * 2 && cells[georgePosition].classList.contains('taxiTwo')) {
-      removeSprite(georgePosition, 'george')
-      removeSprite(georgePosition, 'taxiBackdrop')
-      georgePosition = (width * 3) - 1
-      addSprite(georgePosition, 'taxiBackdrop')
-    } else if (georgePosition > width * 2 && cells[georgePosition].classList.contains('taxiTwo')) {
-      removeSprite(georgePosition, 'george')
-      removeSprite(georgePosition, 'taxiBackdrop')
-      georgePosition--
-      addSprite(georgePosition, 'taxiBackdrop')
-    } 
-  }, 1500)
-}
-moveGeorgeLeftWithTaxiTwo()
 
 // <----- Testing for collision ----->
 let georgeHasCollided = null
@@ -832,13 +648,14 @@ function detectFallingInRoad() {
     georgePosition = startPosition
     addSprite(georgePosition, 'george')
     gameisRunning = false
-  } else {
-    // moveGeorgeRightWithBusOne()
-    // moveGeorgeRightWithBusTwo()
-    // moveGeorgeRightWithBusThree()
-    moveGeorgeLeftWithTaxiOne()
-    moveGeorgeLeftWithTaxiTwo()
   }
+  // } else {
+  //   // moveGeorgeRightWithBusOne()
+  //   // moveGeorgeRightWithBusTwo()
+  //   // moveGeorgeRightWithBusThree()
+  //   moveGeorgeLeftWithTaxiOne()
+  //   moveGeorgeLeftWithTaxiTwo()
+  // }
 } 
 
 // <----- Testing Lives ----->
