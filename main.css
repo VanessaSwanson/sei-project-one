@@ -1,59 +1,105 @@
 * {
   box-sizing: border-box;
 }
-.main {
-  /* display: flex; */
-  justify-content: space-around;
-  align-items: center;
-  display: none;
+body {
+  background-color: #f7b12b;
+  margin: 0px;
 }
 #startScreen {
   /* display: none; */
+  background-color: #2c70af;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(./design-elements/cafe.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 900px;
-  background-position: center;
+  font-family: 'Bungee Shade', cursive;
+}
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  padding: 20px 50px;
+  width: 55%;
+}
+.rightSide {
+  display: flex;
+  align-items: center;
+  margin: 30px 60px 30px 20px;
+}
+#monksFront {
+  border-radius: 10px;
+  border: 2px solid black;
 }
 h1 {
-  font-size: 80px;
-  font-family: helvetica;
-  color: #fdf5e0;
-  text-shadow: 5px 5px #c75a4b;
+  font-size: 70px;
+  color: #f0a8c6;
+/*   color: #fdf5e0; */
+  text-shadow: 3px 3px black;
+/*   text-shadow: 2px 2px #fdf5e0; */
+  margin: 30px 0 0 0;
 }
 #enter {
-  font-size: 20px;
+  font-size: 22px;
   padding: 10px 30px;
-  font-family: helvetica;
-  color: #fdf5e0;
-  background-color: #e18074;
+  font-family: 'Bungee Shade', cursive;
+  color: black;
+  background-color: #fdf5e0;
   border-radius: 5px;
-  border: #fdf5e0 solid 5px;
+  border: 2px solid black;
   cursor: pointer;
 }
 #instructions {
-  width: 400px;
-  margin: 70px;
-  background-color: #e18074;
-  font-family: helvetica;
-  border: #fdf5e0 solid 10px;
+  margin: 20px;
+  background-color: #f0a8c6;
+  border: #fdf5e0 solid 5px;
+  outline: 2px solid black;
   border-radius: 10px;
   padding: 20px;
+  font-family: 'Yeseva One', cursive;
   font-size: 20px;
 }
+h2 {
+  font-size: 40px;
+  font-family: 'Bungee Shade', cursive;
+}
+
 /* <----- Controls ----->  */
+.main {
+  justify-content: center;
+  align-items: center;
+  display: none;
+  padding-top: 30px;
+}
+.leftPanel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 70px 0px;
+  height: 600px;
+}
+#logo {
+  width: 150px;
+  margin-bottom: 20px;
+  display: none;
+}
 .controls {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: helvetica;
+  text-align: center;
+  font-family: 'Bungee Shade', cursive;
   border: 2px solid black;
-  padding: 50px 30px;
+  border-radius: 20px;
+  width: 100%;
+  padding: 20px 15px;
+  margin-bottom: 30px;
+  background-color: #36a2b8;
 }
 .timer {
   font-weight: bold;
@@ -71,35 +117,125 @@ h1 {
   margin-bottom: 20px;
 }
 .start {
-  font-family: helvetica;
-  padding: 5px 10px;
-  font-size: 15px;
-  background-color: coral;
+  font-family: 'Bungee Shade', cursive;
+  padding: 5px 50px;
+  font-size: 30px;
+  background-color: #df6d58;
   border: 1px solid black;
   cursor: pointer;
 }
+#seinfeld-frogger {
+  height: 430px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
 
 /* <----- Basic grid styling for tester stage -----> */
-.grid-wrapper {
-  height: 900px;
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-top: 50px;
+}
+.grid-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 0px;
+  margin-top: 0px;
+  padding-bottom: 50px;
 }
-
 .grid {
   display: flex;
   flex-wrap: wrap;
-  height: 800px;
-  width: 700px;
+  margin-top: 20px;
+  height: 700px;
+  width: 750px;
+  outline: 2px solid black;
+  border-radius: 10px;
+  background-color: #df6d58;
 }
 
 .grid div {
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
   height: 11.11%;
-  width: 9%;
+  width: 9.09%;
+  font-size: 0;
 }
+
+/* <----- Different sections of the board -----> */
+.home {
+  background-image: url(./design-elements/monks.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.home.coffee {
+  background-image: url(./design-elements/coffee-cup.png), url(./design-elements/monks.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.home.georgeAtHome {
+  background-image: url(./design-elements/george-home.png), url(./design-elements/monks.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.road {
+  background-color: #343434;
+  border-bottom: 2px white dashed;
+}
+
+.safeRoad {
+  background-color: #bbbbbb;
+  border: 1px dotted #6e7490;
+}
+.midStretch {
+  background-image: url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.midStretch.coffee {
+  background-image: url(./design-elements/coffee-cup.png), url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.midStretch.george {
+  background-image: url(./design-elements/george.png), url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.startStretch {
+  background-image: url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.startStretch.borderRight {
+  background-image: url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.startStretch.borderLeft {
+  background-image: url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.startStretch.george {
+  background-image:  url(./design-elements/george.png), url(./design-elements/pavement.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+
 
 /* <----- Basic test sprites -----> */
 
@@ -112,18 +248,17 @@ h1 {
 
 /* Have created two taxi classes so two can travel together to make it easier to jump on them */
 .taxiOne {
-  background-image: url(./design-elements/taxi.png);
+  background-image: url(./design-elements/taxiFloat.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .taxiTwo {
-  background-image: url(./design-elements/taxi.png);
+  background-image: url(./design-elements/taxiFloat.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
-
 .uncle-leo {
   background-image: url(./design-elements/uncle-leo.png);
   background-repeat: no-repeat;
@@ -137,37 +272,31 @@ h1 {
   background-position: center;
 }
 .busOne {
-  background-image: url(./design-elements/bus.png);
+  background-image: url(./design-elements/bus-resized.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .busTwo {
-  background-image: url(./design-elements/bus.png);
+  background-image: url(./design-elements/bus-resized.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .busThree {
-  background-image: url(./design-elements/bus.png);
+  background-image: url(./design-elements/bus-resized.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
-.busFour {
-  background-image: url(./design-elements/bus.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-}
-
 .coffee {
-  background-image: url(./design-elements/coffee.png);
+  background-image: url(./design-elements/coffee-cup.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .trash {
+  background-color: #c4aa9b;
   background-image: url(./design-elements/trash.png);
   background-repeat: no-repeat;
   background-size: contain;
@@ -181,24 +310,49 @@ h1 {
   background-size: contain;
   background-position: center;
 }
+.george.susan {
+  background-image: url(./design-elements/george-collide-left.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.george.uncle-leo {
+  background-image: url(./design-elements/george-collide-left.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.george.soup-nazi {
+  background-image: url(./design-elements/george-collide-right.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.georgeWithCoffee {
+  background-image: url(./design-elements/george-coffee.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
 .georgeAtHome {
-  background-image: url(./design-elements/george.png);
+  background-image: url(./design-elements/george-home.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .busBackdrop {
-  background-image: url(./design-elements/busBackdrop.png);
+  background-image: url(./design-elements/bus-backdrop.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
 .taxiBackdrop {
-  background-image: url(./design-elements/taxiBackdrop.png);
+  background-image: url(./design-elements/taxi-backdrop.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
 }
+
 
 
 /* <----- Border -----> */
@@ -211,20 +365,5 @@ h1 {
   background-size: contain;
 }
 
-/* <----- Home stretch -----> */
-.home {
-  background-color: green;
-}
-.road {
-  background-color: gray;
-}
-.safeRoad {
-  background-color: lightgrey;
-}
-.midStretch {
-  background-color: lightskyblue;
-}
-.startStretch {
-  background-color: lightgreen;
-}
+
 

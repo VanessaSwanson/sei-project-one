@@ -323,7 +323,7 @@ function addCoffeePoints() {
   } else if (cells[georgePosition].classList.contains('coffee')) {
     currentScore = currentScore + 100
     scoreScreen.innerHTML = currentScore
-    cells[georgePosition].classList.remove('coffee')
+    removeSprite(georgePosition, 'coffee')
   }
 }
 // call in moveGeorge function
@@ -410,6 +410,7 @@ function moveBusOneRight() {
         addSprite(georgePosition, 'busOne')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
         georgeOnFloat = true
         removeSprite(bus, 'busOne')
@@ -428,7 +429,7 @@ function moveBusOneRight() {
         bus++
         addSprite(bus, 'busOne')
       }
-    }, 1500)
+    }, 1000)
   })
 }
 moveBusOneRight()
@@ -452,6 +453,7 @@ function moveBusTwoRight() {
         addSprite(georgePosition, 'busTwo')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
         georgeOnFloat = true
         removeSprite(bus, 'busTwo')
@@ -470,7 +472,7 @@ function moveBusTwoRight() {
         bus++
         addSprite(bus, 'busTwo')
       }
-    }, 1500)
+    }, 1000)
   })
 }
 moveBusTwoRight()
@@ -494,6 +496,7 @@ function moveBusThreeRight() {
         addSprite(georgePosition, 'busThree')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       } else if (bus < width * 2 -1 && georgePosition === bus || bus < width * 4 - 1 && georgePosition === bus) {
         georgeOnFloat = true
         removeSprite(bus, 'busThree')
@@ -512,7 +515,7 @@ function moveBusThreeRight() {
         bus++
         addSprite(bus, 'busThree')
       }
-    }, 1500)
+    }, 1000)
   })
 }
 moveBusThreeRight()
@@ -536,6 +539,7 @@ function moveTaxiOneLeft() {
         removeSprite(georgePosition, 'taxiBackdrop')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       } else if (taxi > width * 2 && georgePosition === taxi) {
         georgeOnFloat = true
         removeSprite(taxi, 'taxiOne')
@@ -554,7 +558,7 @@ function moveTaxiOneLeft() {
         taxi--
         addSprite(taxi, 'taxiOne')
       }
-    }, 1500)
+    }, 1000)
   })
 }
 moveTaxiOneLeft()
@@ -579,6 +583,7 @@ function moveTaxiTwoLeft() {
         // addSprite(georgePosition, 'taxiTwo')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       } else if (taxi > width * 2 && georgePosition === taxi) {
         georgeOnFloat = true
         removeSprite(taxi, 'taxiTwo')
@@ -597,7 +602,7 @@ function moveTaxiTwoLeft() {
         taxi--
         addSprite(taxi, 'taxiTwo')
       }
-    }, 1500)
+    }, 1000)
   })
 }
 moveTaxiTwoLeft()
@@ -614,6 +619,7 @@ function georgeOverEdgeWhileOnFloat(event) {
         window.alert('Oh no! You went off the edge')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       }
     break
     case 37:
@@ -625,6 +631,7 @@ function georgeOverEdgeWhileOnFloat(event) {
         window.alert('Oh no! You went off the edge')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
+        georgeOnFloat = false
       }
       break
     } 
@@ -641,7 +648,7 @@ function detectCollision() {
       livesCountdown()
       addCoffeePoints()
       window.alert('Oh no!')
-      cells[georgePosition].classList.remove('george')
+      removeSprite(georgePosition, 'george')
       georgePosition = startPosition
       addSprite(georgePosition, 'george')
     }
@@ -668,7 +675,7 @@ function detectFallingInRoad() {
   if (currentLives > 1 && georgeInRoad) {
     livesCountdown()
     window.alert('Oh no!')
-    cells[georgePosition].classList.remove('george')
+    removeSprite(georgePosition, 'george')
     georgePosition = startPosition
     addSprite(georgePosition, 'george')
     georgeInRoad = false
@@ -684,13 +691,6 @@ function detectFallingInRoad() {
     addSprite(georgePosition, 'george')
     gameisRunning = false
   }
-  // } else {
-  //   // moveGeorgeRightWithBusOne()
-  //   // moveGeorgeRightWithBusTwo()
-  //   // moveGeorgeRightWithBusThree()
-  //   moveGeorgeLeftWithTaxiOne()
-  //   moveGeorgeLeftWithTaxiTwo()
-  // }
 } 
 
 // <----- Testing Lives ----->
@@ -863,25 +863,6 @@ function arrivedAtHome() {
     gameisRunning = false
   }
 }
-
-// Old version for reference
-
-// function arrivedAtHome() {
-//   // if (cells[georgePosition].classList.contains('home') && !outOfLives) {
-//   if (cells[georgePosition].classList.contains('home')) {
-//       currentScore = currentScore + 500
-//       addCoffeePoints()
-//       currentScore.innerHTML = currentScore
-//       window.alert(`You did it! You got your first George home, now try another`)
-//       georgeAtHomePosition = georgePosition
-//       addSprite(georgeAtHomePosition, 'georgeAtHome')
-//       georgePosition = 59
-//       addSprite(georgePosition, 'george')  
-//       georgeAtHome = true
-//   }
-// }
-
-// call function in moveGeorge function above
 
 
 // <----- Testing timer ----->
