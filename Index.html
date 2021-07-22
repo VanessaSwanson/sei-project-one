@@ -16,7 +16,6 @@
     <div class='leftSide'>
       <div class='welcome'>
         <h1>Seinfeld Frogger</h1>
-        <!-- <audio id='welcomeAudio' autoplay=true src='../sei-project-one/design-elements/seinfeldTheme.m4a' controls loop ></audio> -->
       </div>
       <div id='instructions'>
         <h2>How to play</h2>
@@ -36,7 +35,6 @@
   <div class='main'>
     <div class='leftPanel'>
       <div class='controls'>
-        <img id='logo' alt='seinfeld logo' src='design-elements/seinfeld-logo.png'>
         <div class='timer'>
           Countdown: <span id='timeRemaining'>60
           </span> seconds
@@ -48,11 +46,15 @@
         Lives: <span id='currentLives'>3</span>
         </div>
         <button class='start'>Start</button>
-        <audio id="serenity"></audio>
+        <audio></audio>
       </div>
       <img id='seinfeld-frogger' alt='illustration of the frogger episode of Seinfeld' src='design-elements/frogger-art.png'>
     </div>
     <div class='rightPanel'>
+      <div id='alert' style='display: none'>
+        <span id='alertMessage'>This is an alert box</span>
+        <button class='closebtn' onclick="this.parentElement.style.display='none';">Close</button>
+      </div>
       <div class='grid-wrapper'>
        <div class='grid'></div>
       </div>

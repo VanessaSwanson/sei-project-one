@@ -47,7 +47,8 @@ h1 {
   padding: 10px 30px;
   font-family: 'Bungee Shade', cursive;
   color: black;
-  background-color: #fdf5e0;
+  background-color: #dcddd0;
+/*   background-color: #fdf5e0; */
   border-radius: 5px;
   border: 2px solid black;
   cursor: pointer;
@@ -55,7 +56,7 @@ h1 {
 #instructions {
   margin: 20px;
   background-color: #f0a8c6;
-  border: #fdf5e0 solid 5px;
+  border: 5px solid #dcddd0;
   outline: 2px solid black;
   border-radius: 10px;
   padding: 20px;
@@ -81,11 +82,6 @@ h2 {
   justify-content: center;
   padding: 30px 70px 0px;
   height: 600px;
-}
-#logo {
-  width: 150px;
-  margin-bottom: 20px;
-  display: none;
 }
 .controls {
   display: flex;
@@ -129,6 +125,33 @@ h2 {
   border: 2px solid black;
   border-radius: 10px;
 }
+#alert{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #df6d58;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-family: 'Yeseva One', cursive;
+  font-size: 30px;
+  margin-top: 250px;
+  padding: 0 20px;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  z-index: 10;
+}
+.closebtn {
+  margin-top: 30px;
+  padding: 5px 10px;
+  font-family: 'Bungee Shade', cursive;
+  background-color: #36a2b8;
+  font-size: 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
 
 /* <----- Basic grid styling for tester stage -----> */
 .rightPanel {
@@ -155,7 +178,6 @@ h2 {
   border-radius: 10px;
   background-color: #df6d58;
 }
-
 .grid div {
   display: flex;
   align-items: center;
