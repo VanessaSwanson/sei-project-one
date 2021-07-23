@@ -394,7 +394,107 @@ let georgeOnFloat = null
 function moveBusOneRight() {
   currentBusOnePosition = busOnePosition.map(bus => {
     setInterval(() => {
-      if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
+      if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+        thirdGeorgeAtHomePosition = null
+        fourthGeorgeAtHomePosition = null 
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+        thirdGeorgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+      } else if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
         georgeOnFloat = true
         removeSprite(bus, 'george')
         addSprite(georgePosition, 'busBackdrop')
@@ -434,7 +534,107 @@ moveBusOneRight()
 function moveBusTwoRight() {
   currentBusTwoPosition = busTwoPosition.map(bus => {
     setInterval(() => {
-      if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
+      if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+        thirdGeorgeAtHomePosition = null
+        fourthGeorgeAtHomePosition = null 
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+        thirdGeorgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+      } else if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
         georgeOnFloat = true
         removeSprite(bus, 'george')
         addSprite(georgePosition, 'busBackdrop')
@@ -474,7 +674,107 @@ moveBusTwoRight()
 function moveBusThreeRight() {
   currentBusThreePosition = busThreePosition.map(bus => {
     setInterval(() => {
-      if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
+      if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+        thirdGeorgeAtHomePosition = null
+        fourthGeorgeAtHomePosition = null 
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+        thirdGeorgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+        secondGeorgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1 && georgeAtHomePosition) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+        removeSprite(georgeAtHomePosition, 'georgeAtHome')
+        georgeAtHomePosition = null
+      } else if ((bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) && currentLives === 1) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+      } else if (bus === width * 2 - 1  && georgePosition === bus || bus === width * 4 - 1 && georgePosition === bus) {
         georgeOnFloat = true
         removeSprite(bus, 'george')
         addSprite(georgePosition, 'busBackdrop')
@@ -511,6 +811,147 @@ function moveBusThreeRight() {
 }
 moveBusThreeRight()
 
+// function moveTaxiOneLeft() {
+//   currentTaxiOnePosition = taxiOnePosition.map(bus => {
+//     setInterval(() => {
+//       if ((taxi === width * 2  && georgePosition === taxi || taxi === width * 4 && georgePosition === taxi) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
+//         livesCountdown()
+//         clearInterval(intervalId)
+//         currentLives = livesStart
+//         livesScreen.innerHTML = currentLives
+//         currentScore = 0
+//         scoreScreen.innerHTML = currentScore
+//         gameisRunning = false
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         removeSprite(georgePosition, 'george')
+//         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//         audio.play()
+//         createOutOfLivesPopup()
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//         removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//         removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//         removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+//         removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
+//         georgeAtHomePosition = null
+//         secondGeorgeAtHomePosition = null
+//         thirdGeorgeAtHomePosition = null
+//         fourthGeorgeAtHomePosition = null 
+//       } else if ((taxi === width * 2 - 1  && georgePosition === taxi || taxi === width * 4 - 1 && georgePosition === taxi) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
+//         livesCountdown()
+//         clearInterval(intervalId)
+//         currentLives = livesStart
+//         livesScreen.innerHTML = currentLives
+//         currentScore = 0
+//         scoreScreen.innerHTML = currentScore
+//         gameisRunning = false
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         removeSprite(georgePosition, 'george')
+//         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//         audio.play()
+//         createOutOfLivesPopup()
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//         removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//         removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//         removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+//         georgeAtHomePosition = null
+//         secondGeorgeAtHomePosition = null
+//         thirdGeorgeAtHomePosition = null
+//       } else if ((taxi === width * 2 - 1  && georgePosition === taxi || taxi === width * 4 - 1 && georgePosition === taxi) && currentLives === 1 && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+//         livesCountdown()
+//         clearInterval(intervalId)
+//         currentLives = livesStart
+//         livesScreen.innerHTML = currentLives
+//         currentScore = 0
+//         scoreScreen.innerHTML = currentScore
+//         gameisRunning = false
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         removeSprite(georgePosition, 'george')
+//         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//         audio.play()
+//         createOutOfLivesPopup()
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//         removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//         removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//         georgeAtHomePosition = null
+//         secondGeorgeAtHomePosition = null
+//       } else if ((taxi === width * 2 - 1  && georgePosition === taxi || taxi === width * 4 - 1 && georgePosition === taxi) && currentLives === 1 && georgeAtHomePosition) {
+//         livesCountdown()
+//         clearInterval(intervalId)
+//         currentLives = livesStart
+//         livesScreen.innerHTML = currentLives
+//         currentScore = 0
+//         scoreScreen.innerHTML = currentScore
+//         gameisRunning = false
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         removeSprite(georgePosition, 'george')
+//         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//         audio.play()
+//         createOutOfLivesPopup()
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//         removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//         georgeAtHomePosition = null
+//       } else if ((taxi === width * 2 - 1  && georgePosition === taxi || taxi === width * 4 - 1 && georgePosition === taxi) && currentLives === 1) {
+//         livesCountdown()
+//         clearInterval(intervalId)
+//         currentLives = livesStart
+//         livesScreen.innerHTML = currentLives
+//         currentScore = 0
+//         scoreScreen.innerHTML = currentScore
+//         gameisRunning = false
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         removeSprite(georgePosition, 'george')
+//         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//         audio.play()
+//         createOutOfLivesPopup()
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//       } else if (taxi === width * 2 - 1  && georgePosition === taxi || taxi === width * 4 - 1 && georgePosition === taxi) {
+//         georgeOnFloat = true
+//         removeSprite(taxi, 'george')
+//         addSprite(georgePosition, 'taxiBackdrop')
+//         audio.src = 'design-elements/audio/serenity.mp3'
+//         audio.play()
+//         // createCollisionPopup()
+//         currentLives = currentLives - 1
+//         livesScreen.innerHTML = currentLives
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         addSprite(georgePosition, 'taxiOne')
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//       } else if (taxi < width * 2 -1 && georgePosition === taxi || taxi < width * 4 - 1 && georgePosition === taxi) {
+//         georgeOnFloat = true
+//         removeSprite(taxi, 'taxiOne')
+//         removeSprite(taxi, 'george')
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         taxi--
+//         georgePosition--
+//         addSprite(taxi, 'taxiOne')
+//         addSprite(georgePosition, 'taxiBackdrop') 
+//       } else if (taxi === width * 2) {
+//         removeSprite(taxi, 'taxiOne')
+//         taxi = taxi - (width - 1)
+//         addSprite(taxi, 'taxiOne')
+//       } else if (taxi > width * 2) {
+//         removeSprite(taxi, 'taxiOne')
+//         taxi++
+//         addSprite(taxi, 'taxiOne')
+//       }
+//     }, 1000)
+//   })
+// }
+
+// moveTaxiOneLeft()
+
 function moveTaxiOneLeft() {
   currentTaxiOnePosition = taxiOnePosition.map(taxi => {
     setInterval(() => {
@@ -523,6 +964,8 @@ function moveTaxiOneLeft() {
         currentLives = currentLives - 1
         livesScreen.innerHTML = currentLives
         removeSprite(georgePosition, 'taxiBackdrop')
+        taxi = georgePosition
+        addSprite(taxi, 'taxiOne')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
         georgeOnFloat = false
@@ -1000,7 +1443,7 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   audio.src = 'design-elements/audio/serenity.mp3'
   audio.play()
   removeSprite(georgePosition, 'george')
-  createCollisionPopup()
+  // createCollisionPopup()
   georgePosition = startPosition
   addSprite(georgePosition, 'george')
   georgeHasCollided = false
