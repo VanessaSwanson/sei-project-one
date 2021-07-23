@@ -136,15 +136,18 @@ h2 {
   border-radius: 10px;
   font-family: 'Yeseva One', cursive;
   font-size: 30px;
-  margin-top: 250px;
+  margin-top: 150px;
   padding: 0 20px;
   width: 400px;
-  height: 300px;
+  height: 500px;
   position: absolute;
   z-index: 10;
 }
+.alertImage {
+  width: 200px;
+}
 .closebtn {
-  margin-top: 30px;
+  margin: 30px;
   padding: 5px 10px;
   font-family: 'Bungee Shade', cursive;
   background-color: #36a2b8;

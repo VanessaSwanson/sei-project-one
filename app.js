@@ -400,7 +400,7 @@ function moveBusOneRight() {
         addSprite(georgePosition, 'busBackdrop')
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no you have gone over the edge!')
+        // createCollisionPopup()
         currentLives = currentLives - 1
         livesScreen.innerHTML = currentLives
         removeSprite(georgePosition, 'busBackdrop')
@@ -440,7 +440,7 @@ function moveBusTwoRight() {
         addSprite(georgePosition, 'busBackdrop')
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no you have gone over the edge!')
+        // createCollisionPopup()
         currentLives = currentLives - 1
         livesScreen.innerHTML = currentLives
         removeSprite(georgePosition, 'busBackdrop')
@@ -480,7 +480,7 @@ function moveBusThreeRight() {
         addSprite(georgePosition, 'busBackdrop')
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no you have gone over the edge!')
+        // createCollisionPopup()
         currentLives = currentLives - 1
         livesScreen.innerHTML = currentLives
         removeSprite(georgePosition, 'busBackdrop')
@@ -519,7 +519,7 @@ function moveTaxiOneLeft() {
         addSprite(georgePosition, 'taxiBackdrop')
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no you have gone over the edge!')
+        // createCollisionPopup()
         currentLives = currentLives - 1
         livesScreen.innerHTML = currentLives
         removeSprite(georgePosition, 'taxiBackdrop')
@@ -557,7 +557,7 @@ function moveTaxiTwoLeft() {
         addSprite(georgePosition, 'taxiBackdrop')
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no you have gone over the edge!')
+        // createCollisionPopup()
         currentLives = currentLives - 1
         livesScreen.innerHTML = currentLives
         removeSprite(georgePosition, 'taxiBackdrop')
@@ -591,6 +591,23 @@ moveTaxiTwoLeft()
 function georgeOverEdgeWhileOnFloat(event) {
   switch(event.keyCode) {
     case 39:
+      if ((georgeOnFloat && currentLives === 1) && cells[georgePosition].classList.contains('borderRight')) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+      }
       if (georgeOnFloat && cells[georgePosition].classList.contains('borderRight')) {
         removeSprite(georgePosition, 'busBackdrop')
         removeSprite(georgePosition, 'george')
@@ -598,13 +615,30 @@ function georgeOverEdgeWhileOnFloat(event) {
         livesScreen.innerHTML = currentLives
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no! You went off the edge')
+        // window.alert('Oh no! You went off the edge')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
         georgeOnFloat = false
       }
     break
     case 37:
+      if ((georgeOnFloat && currentLives === 1) && cells[georgePosition].classList.contains('borderLeft')) {
+        livesCountdown()
+        clearInterval(intervalId)
+        currentLives = livesStart
+        livesScreen.innerHTML = currentLives
+        currentScore = 0
+        scoreScreen.innerHTML = currentScore
+        gameisRunning = false
+        removeSprite(georgePosition, 'busBackdrop')
+        removeSprite(georgePosition, 'george')
+        audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+        audio.play()
+        createOutOfLivesPopup()
+        georgePosition = startPosition
+        addSprite(georgePosition, 'george')
+        georgeOnFloat = false
+      }
       if (georgeOnFloat && cells[georgePosition].classList.contains('borderLeft')) {
         removeSprite(georgePosition, 'taxiBackdrop')
         removeSprite(georgePosition, 'george')
@@ -612,7 +646,7 @@ function georgeOverEdgeWhileOnFloat(event) {
         livesScreen.innerHTML = currentLives
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        window.alert('Oh no! You went off the edge')
+        // window.alert('Oh no! You went off the edge')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
         georgeOnFloat = false
@@ -622,83 +656,214 @@ function georgeOverEdgeWhileOnFloat(event) {
 }
 window.addEventListener('keyup', georgeOverEdgeWhileOnFloat)
 
+
+
+
+// function georgeOverEdgeWhileOnFloat(event) {
+//   switch(event.keyCode) {
+//     case 39:
+//       if (((currentLives <= 1 && georgeOnFloat) && cells[georgePosition].classList.contains('borderRight')) && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
+//           georgeOnFloat = false
+//           // removeSprite(georgePosition, 'george')
+//           removeSprite(georgePosition, 'busBackdrop')
+//           clearInterval(intervalId) 
+//           audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//           audio.play()
+//           outOfLives = true
+//           createOutOfLivesPopup()
+//           currentCountdown = countdownStart
+//           countdownScreen.innerHTML = currentCountdown
+//           currentScore = 0
+//           scoreScreen.innerHTML = currentScore
+//           currentLives = livesStart
+//           livesScreen.innerHTML = currentLives
+//           removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
+//           georgeAtHomePosition = null
+//           secondGeorgeAtHomePosition = null
+//           thirdGeorgeAtHomePosition = null
+//           fourthGeorgeAtHomePosition = null
+//           removeSprite(georgePosition, 'taxiBackdrop')
+//           removeSprite(georgePosition, 'busBackdrop')
+//           removeSprite(georgePosition, 'george')
+//           georgePosition = startPosition
+//           addSprite(georgePosition, 'george')
+//           gameisRunning = false
+//         } else if (((currentLives <= 1 && georgeOnFloat) && cells[georgePosition].classList.contains('borderRight')) && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
+//           georgeOnFloat = false
+//           // removeSprite(georgePosition, 'george')
+//           removeSprite(georgePosition, 'busBackdrop')
+//           audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//           audio.play()
+//           clearInterval(intervalId)
+//           currentCountdown = countdownStart
+//           countdownScreen.innerHTML = currentCountdown
+//           removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
+//           georgeAtHome = true
+//           outOfLives = true
+//           createOutOfLivesPopup()
+//           currentLives = livesStart
+//           livesScreen.innerHTML = currentLives 
+//           georgeAtHomePosition = null 
+//           secondGeorgeAtHomePosition = null 
+//           thirdGeorgeAtHomePosition = null 
+//           georgePosition = startPosition
+//           addSprite(georgePosition, 'george')
+//           gameisRunning = false
+//         } else if (((currentLives <= 1 && georgeOnFloat) && cells[georgePosition].classList.contains('borderRight')) && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+//           georgeOnFloat = false
+//           // removeSprite(georgePosition, 'george')
+//           removeSprite(georgePosition, 'busBackdrop')
+//           audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//           audio.play()
+//           clearInterval(intervalId)
+//           currentCountdown = countdownStart
+//           countdownScreen.innerHTML = currentCountdown
+//           removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//           georgeAtHome = true
+//           outOfLives = true
+//           createOutOfLivesPopup()
+//           currentLives = livesStart
+//           livesScreen.innerHTML = currentLives 
+//           georgeAtHomePosition = null 
+//           secondGeorgeAtHomePosition = null 
+//           georgePosition = startPosition
+//           addSprite(georgePosition, 'george')
+//           gameisRunning = false
+//         } else if (((currentLives <= 1 && georgeOnFloat) && cells[georgePosition].classList.contains('borderRight')) && georgeAtHomePosition) {
+//           georgeOnFloat = false
+//           // removeSprite(georgePosition, 'george')
+//           removeSprite(georgePosition, 'busBackdrop')
+//           audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//           audio.play()
+//           clearInterval(intervalId)
+//           currentCountdown = countdownStart
+//           countdownScreen.innerHTML = currentCountdown
+//           removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//           georgeAtHome = true
+//           outOfLives = true
+//           createOutOfLivesPopup()
+//           currentLives = livesStart
+//           livesScreen.innerHTML = currentLives 
+//           georgeAtHomePosition = null 
+//           secondGeorgeAtHomePosition = null 
+//           georgePosition = startPosition
+//           addSprite(georgePosition, 'george')
+//           gameisRunning = false
+//         } else if (currentLives <= 1 && cells[georgePosition].classList.contains('borderRight')) {
+//           georgeOnFloat = false
+//           removeSprite(georgePosition, 'busBackdrop')
+//           georgePosition = startPosition
+//           addSprite(georgePosition, 'george')
+//           audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
+//           audio.play()
+//           clearInterval(intervalId)
+//           currentCountdown = countdownStart
+//           countdownScreen.innerHTML = currentCountdown
+//           removeSprite(georgeAtHomePosition, 'georgeAtHome')
+//           removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
+//           georgeAtHome = true
+//           outOfLives = true
+//           createOutOfLivesPopup()
+//           currentLives = livesStart
+//           livesScreen.innerHTML = currentLives 
+//           georgeAtHomePosition = null 
+//           secondGeorgeAtHomePosition = null 
+//           gameisRunning = false
+//         } else if (georgeOnFloat && cells[georgePosition].classList.contains('borderRight')) {
+//           removeSprite(georgePosition, 'busBackdrop')
+//           removeSprite(georgePosition, 'george')
+//           currentLives = currentLives - 1
+//           livesScreen.innerHTML = currentLives
+//           audio.src = 'design-elements/audio/serenity.mp3'
+//           audio.play()
+//           georgePosition = startPosition
+//           addSprite(georgePosition, 'george')
+//           georgeOnFloat = false
+//           // createCollisionPopup()
+//         }
+//     break
+//     case 37:
+//       if (georgeOnFloat && cells[georgePosition].classList.contains('borderLeft')) {
+//         removeSprite(georgePosition, 'taxiBackdrop')
+//         removeSprite(georgePosition, 'george')
+//         currentLives = currentLives - 1
+//         livesScreen.innerHTML = currentLives
+//         audio.src = 'design-elements/audio/serenity.mp3'
+//         audio.play()
+//         // createCollisionPopup()
+//         georgePosition = startPosition
+//         addSprite(georgePosition, 'george')
+//         georgeOnFloat = false
+//       }
+//       break
+//     } 
+// }
+// window.addEventListener('keyup', georgeOverEdgeWhileOnFloat)
+
 // <----- Function for popups----->
-// const popup = document.querySelector('#alert')
-// const closePopupButton = document.querySelector('.closebtn')
-// let popupMessage = document.querySelector('#alertMessage')
-// // let popupActive = null
+const popup = document.querySelector('#alert')
+const closePopupButton = document.querySelector('.closebtn')
+let popupMessage = document.querySelector('#alertMessage')
+let popupImage = document.querySelector('.alertImage')
 
-// function createCollisionPopup() {
-//   if(georgeHasCollided || georgeInRoad) {
-//     popup.style.display = 'flex';
-//     popupMessage.innerHTML = 'Oh no! Try again.'
-//     // popupActive = true
-//     clearInterval(intervalId)
-//   }
-// }
+function createCollisionPopup() {
+  popup.style.display = 'flex';
+  popupMessage.innerHTML = 'Oh no!'
+  popup.style.margin = '200px 0 0 0'
+  popup.style.width = '300px'
+  popup.style.height = '250px'
+  popupImage.src=''
+  clearInterval(intervalId)
+}
+function createOutOfLivesPopup() {
+  popup.style.display = 'flex';
+  popupMessage.innerHTML = 'You are out of lives, start again!'
+  popup.style.margin = '150px 0 0 0'
+  popup.style.width = '400px'
+  popup.style.height = '500px'
+  popupImage.src='https://media.giphy.com/media/1lwmbW7eYML9kLjpCA/giphy.gif'
+  clearInterval(intervalId)
+}
+function createOutOfTimePopup() {
+  popup.style.display = 'flex';
+  popupMessage.innerHTML = 'You are out of time, start again!'
+  popup.style.margin = '150px 0 0 0'
+  popup.style.width = '400px'
+  popup.style.height = '500px'
+  popupImage.src='https://media.giphy.com/media/NiT29gUcZ3IS4/source.gif'
+  clearInterval(intervalId)
+}
+function createYouWonPopup() {
+  popup.style.display = 'flex';
+  popupMessage.innerHTML = `You did it! You got George to Monk's diner! Your final score is ${currentScore}.`
+  popup.style.margin = '150px 0 0 0'
+  popup.style.width = '400px'
+  popup.style.height = '500px'
+  popupImage.src='https://media.giphy.com/media/13Y6LAZJqRspI4/source.gif'
+  clearInterval(intervalId)
+}
 
-// function closePopup() {
-//   if (georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
-//     gameisRunning = false
-//     georgePosition = startPosition
-//     popup.style.display = 'none'
-//     clearInterval(intervalId)
-//     addSprite(georgePosition, 'george')
-//     removeSprite(georgeAtHomePosition, 'georgeAtHome')
-//     removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
-//     removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
-//     removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
-//     georgeAtHomePosition = null 
-//     secondGeorgeAtHomePosition = null 
-//     thirdGeorgeAtHomePosition = null 
-//     fourthGeorgeAtHomePosition = null 
-//   } else if (georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
-//     gameisRunning = false
-//     georgePosition = startPosition
-//     popup.style.display = 'none'
-//     clearInterval(intervalId)
-//     addSprite(georgePosition, 'george')
-//     removeSprite(georgeAtHomePosition, 'georgeAtHome')
-//     removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
-//     removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
-//     georgeAtHomePosition = null 
-//     secondGeorgeAtHomePosition = null 
-//     thirdGeorgeAtHomePosition = null 
-//   } else if (georgeAtHomePosition && secondGeorgeAtHomePosition) {
-//     gameisRunning = false
-//     georgePosition = startPosition
-//     popup.style.display = 'none'
-//     clearInterval(intervalId)
-//     addSprite(georgePosition, 'george')
-//     removeSprite(georgeAtHomePosition, 'georgeAtHome')
-//     removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
-//     georgeAtHomePosition = null 
-//     secondGeorgeAtHomePosition = null 
-//   } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition) {
-//     georgePosition = startPosition
-//     popup.style.display = 'none'
-//     clearInterval(intervalId)
-//     addSprite(georgePosition, 'george')
-//     removeSprite(georgeAtHomePosition, 'georgeAtHome')
-//     georgeAtHomePosition = null   
-//     gameisRunning = true
-//   } else if (!gameisRunning) {
-//     removeSprite(georgePosition, 'george')
-//     georgePosition = startPosition
-//     popup.style.display = 'none'
-//     clearInterval(intervalId)
-//     addSprite(georgePosition, 'george')
-//   } else if (gameisRunning) {
-//     popup.style.display = 'none'
-//     // popupActive = false
-//     intervalId = setInterval(() => {
-//       currentCountdown--
-//       countdownScreen.innerHTML = currentCountdown
-//       gameisRunning = true
-//     }, 1000)
-//   }
-// }
-// closePopupButton.addEventListener('click', closePopup)
+function closePopup() {
+  if (outOfLives) {
+    popup.style.display = 'none'
+    clearInterval(intervalId)
+  } else if (outOfLives = false) {
+    popup.style.display = 'none'
+    intervalId = setInterval(() => {
+      currentCountdown--
+      countdownScreen.innerHTML = currentCountdown
+      gameisRunning = true
+    },1000)
+}
+}
+closePopupButton.addEventListener('click', closePopup)
 
 // <----- Testing for collision ----->
 let georgeHasCollided = null
@@ -714,7 +879,8 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   clearInterval(intervalId) 
   audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
   audio.play()
-  window.alert('Game over - you are out of time!')
+  outOfLives = true
+  createOutOfLivesPopup()
   currentCountdown = countdownStart
   countdownScreen.innerHTML = currentCountdown
   currentScore = 0
@@ -740,7 +906,6 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   removeSprite(georgePosition, 'george')
   audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
   audio.play()
-  window.alert('You have run out of lives!')
   clearInterval(intervalId)
   currentCountdown = countdownStart
   countdownScreen.innerHTML = currentCountdown
@@ -749,8 +914,7 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
   georgeAtHome = true
   outOfLives = true
-  // popup.style.display = 'flex';
-  // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
+  createOutOfLivesPopup()
   currentLives = livesStart
   livesScreen.innerHTML = currentLives 
   georgeAtHomePosition = null 
@@ -764,7 +928,6 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   removeSprite(georgePosition, 'george')
   audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
   audio.play()
-  window.alert('You have run out of lives!')
   clearInterval(intervalId)
   currentCountdown = countdownStart
   countdownScreen.innerHTML = currentCountdown
@@ -772,8 +935,7 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
   georgeAtHome = true
   outOfLives = true
-  // popup.style.display = 'flex';
-  // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
+  createOutOfLivesPopup()
   currentLives = livesStart
   livesScreen.innerHTML = currentLives 
   georgeAtHomePosition = null 
@@ -786,15 +948,13 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   removeSprite(georgePosition, 'george')
   audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
   audio.play()
-  window.alert('You have run out of lives!')
   clearInterval(intervalId)
   currentCountdown = countdownStart
   countdownScreen.innerHTML = currentCountdown
   removeSprite(georgeAtHomePosition, 'georgeAtHome')
   georgeAtHome = true
   outOfLives = true
-  // popup.style.display = 'flex';
-  // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
+  createOutOfLivesPopup()
   currentLives = livesStart
   livesScreen.innerHTML = currentLives 
   georgePosition = startPosition
@@ -805,9 +965,7 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
   audio.play()
   gameisRunning = false
-  // popup.style.display = 'flex';
-  // popupMessage.innerHTML = 'You are out of lives! Start again.'
-  // window.alert('You have run out of lives!')
+  removeSprite(georgePosition, 'george')
   outOfLives = true
   clearInterval(intervalId)
   currentCountdown = countdownStart
@@ -815,50 +973,21 @@ if ((currentLives <= 1 && georgeHasCollided) && georgeAtHomePosition && secondGe
   currentLives = livesStart
   livesScreen.innerHTML = currentLives
   georgePosition = startPosition
+  georgeHasCollided = false
+  createOutOfLivesPopup()
   addSprite(georgePosition, 'george')
 } else if (currentLives > 1 && georgeHasCollided) {
   livesCountdown()
   audio.src = 'design-elements/audio/serenity.mp3'
   audio.play()
-  // createCollisionPopup()
-  window.alert('Oh no!')
   removeSprite(georgePosition, 'george')
+  createCollisionPopup()
   georgePosition = startPosition
   addSprite(georgePosition, 'george')
   georgeHasCollided = false
 }
 }
 
-// function detectCollision() {
-//   if (currentLives > 1 && (cells[georgePosition].classList.contains('georgeAtHome') || cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo') || cells[georgePosition].classList.contains('trash') || cells[georgePosition].classList.contains('susan'))) {
-//       georgeHasCollided = true
-//       livesCountdown()
-//       addCoffeePoints()
-//       audio.src = 'design-elements/audio/serenity.mp3'
-//       audio.play()
-//       // createCollisionPopup() 
-//       // window.alert('Oh no!')
-//       removeSprite(georgePosition, 'george')
-//       georgePosition = startPosition
-//       addSprite(georgePosition, 'george')
-//     } else if (currentLives <=1 && (cells[georgePosition].classList.contains('georgeAtHome') || cells[georgePosition].classList.contains('soup-nazi') || cells[georgePosition].classList.contains('uncle-leo') || cells[georgePosition].classList.contains('trash') || cells[georgePosition].classList.contains('susan'))) {
-//       audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
-//       audio.play()
-//       gameisRunning = false
-//       // closePopup()
-//       // window.alert('You have run out of lives!')
-//       outOfLives = true
-//       // popup.style.display = 'flex';
-//       // popupMessage.innerHTML = 'You are out of lives! Start again.'
-//       currentCountdown = countdownStart
-//       countdownScreen.innerHTML = currentCountdown
-//       currentLives = livesStart
-//       livesScreen.innerHTML = currentLives
-//       georgePosition = startPosition
-//       addSprite(georgePosition, 'george')
-//       clearInterval(intervalId)
-//     }
-// }
 
 // <----- Testing falling in road----->
 function createRoad() {
@@ -870,7 +999,8 @@ function createRoad() {
 }
 createRoad()
 
-// Annoyingly having to repeat code in this function, but only way I could get it to work!
+
+// <----- falling in road function ------>
 
 let georgeInRoad = null
 
@@ -880,13 +1010,16 @@ function detectFallingInRoad() {
       }
     if ((currentLives <= 1 && georgeInRoad) && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition && fourthGeorgeAtHomePosition) {
         clearInterval(intervalId) 
+        removeSprite(georgePosition, 'george')
         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
         audio.play()
-        window.alert('Game over - you are out of time!')
         currentCountdown = countdownStart
         countdownScreen.innerHTML = currentCountdown
         currentScore = 0
         scoreScreen.innerHTML = currentScore
+        outOfLives = true
+        gameisRunning = false
+        createOutOfLivesPopup()
         currentLives = livesStart
         livesScreen.innerHTML = currentLives
         removeSprite(georgeAtHomePosition, 'georgeAtHome')
@@ -902,11 +1035,10 @@ function detectFallingInRoad() {
         removeSprite(georgePosition, 'george')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
-        gameisRunning = false
       } else if ((currentLives <= 1 && georgeInRoad) && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
+        removeSprite(georgePosition, 'george')
         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
         audio.play()
-        window.alert('You have run out of lives!')
         clearInterval(intervalId)
         currentCountdown = countdownStart
         countdownScreen.innerHTML = currentCountdown
@@ -915,8 +1047,8 @@ function detectFallingInRoad() {
         removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
         georgeAtHome = true
         outOfLives = true
-        // popup.style.display = 'flex';
-        // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
+        gameisRunning = false
+        createOutOfLivesPopup()
         currentLives = livesStart
         livesScreen.innerHTML = currentLives 
         georgeAtHomePosition = null 
@@ -924,11 +1056,10 @@ function detectFallingInRoad() {
         thirdGeorgeAtHomePosition = null 
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
-        gameisRunning = false
       } else if ((currentLives <= 1 && georgeInRoad) && georgeAtHomePosition && secondGeorgeAtHomePosition) {
+        removeSprite(georgePosition, 'george')
         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
         audio.play()
-        window.alert('You have run out of lives!')
         clearInterval(intervalId)
         currentCountdown = countdownStart
         countdownScreen.innerHTML = currentCountdown
@@ -936,42 +1067,40 @@ function detectFallingInRoad() {
         removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
         georgeAtHome = true
         outOfLives = true
-        // popup.style.display = 'flex';
-        // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
+        gameisRunning = false
+        createOutOfLivesPopup()
         currentLives = livesStart
         livesScreen.innerHTML = currentLives 
         georgeAtHomePosition = null 
         secondGeorgeAtHomePosition = null 
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
-        gameisRunning = false
       } else if ((currentLives <= 1 && georgeInRoad) && georgeAtHomePosition) {
         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
         audio.play()
-        window.alert('You have run out of lives!')
+        removeSprite(georgePosition, 'george')
         clearInterval(intervalId)
         currentCountdown = countdownStart
         countdownScreen.innerHTML = currentCountdown
         removeSprite(georgeAtHomePosition, 'georgeAtHome')
         georgeAtHome = true
         outOfLives = true
-        // popup.style.display = 'flex';
-        // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
+        gameisRunning = false
+        createOutOfLivesPopup()
         currentLives = livesStart
         livesScreen.innerHTML = currentLives 
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
         georgeAtHomePosition = null 
-        gameisRunning = false
       } else if (currentLives <=1 && georgeInRoad) {
         audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
         audio.play()
+        removeSprite(georgePosition, 'george')
+        georgeInRoad = false
         gameisRunning = false
-        // popup.style.display = 'flex';
-        // popupMessage.innerHTML = 'You are out of lives! Start again.'
-        // window.alert('You have run out of lives!')
         outOfLives = true
         clearInterval(intervalId)
+        createOutOfLivesPopup()
         currentCountdown = countdownStart
         countdownScreen.innerHTML = currentCountdown
         currentLives = livesStart
@@ -980,10 +1109,9 @@ function detectFallingInRoad() {
         addSprite(georgePosition, 'george')
       } else if (currentLives > 1 && georgeInRoad) {
         livesCountdown()
+        // createCollisionPopup()
         audio.src = 'design-elements/audio/serenity.mp3'
         audio.play()
-        // createCollisionPopup()
-        window.alert('Oh no!')
         removeSprite(georgePosition, 'george')
         georgePosition = startPosition
         addSprite(georgePosition, 'george')
@@ -1010,14 +1138,11 @@ function livesCountdown() {
     removeSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
     audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
     audio.play()
-    // window.alert('You have run out of lives!')
     clearInterval(intervalId)
     currentCountdown = countdownStart
     countdownScreen.innerHTML = currentCountdown
     georgeAtHome = true
     outOfLives = true
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
     currentLives = livesStart
     livesScreen.innerHTML = currentLives 
     georgeAtHomePosition = null 
@@ -1028,7 +1153,6 @@ function livesCountdown() {
   } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition && secondGeorgeAtHomePosition && thirdGeorgeAtHomePosition) {
     audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
     audio.play()
-    window.alert('You have run out of lives!')
     clearInterval(intervalId)
     currentCountdown = countdownStart
     countdownScreen.innerHTML = currentCountdown
@@ -1037,8 +1161,6 @@ function livesCountdown() {
     removeSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
     georgeAtHome = true
     outOfLives = true
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
     currentLives = livesStart
     livesScreen.innerHTML = currentLives 
     georgeAtHomePosition = null 
@@ -1048,7 +1170,6 @@ function livesCountdown() {
   } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition && secondGeorgeAtHomePosition) {
     audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
     audio.play()
-    window.alert('You have run out of lives!')
     clearInterval(intervalId)
     currentCountdown = countdownStart
     countdownScreen.innerHTML = currentCountdown
@@ -1056,8 +1177,6 @@ function livesCountdown() {
     removeSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
     georgeAtHome = true
     outOfLives = true
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
     currentLives = livesStart
     livesScreen.innerHTML = currentLives 
     georgeAtHomePosition = null 
@@ -1066,28 +1185,22 @@ function livesCountdown() {
   } else if ((currentLives === 1 && georgeHasCollided || georgeInRoad) && georgeAtHomePosition) {
     audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
     audio.play()
-    window.alert('You have run out of lives!')
     clearInterval(intervalId)
     currentCountdown = countdownStart
     countdownScreen.innerHTML = currentCountdown
     removeSprite(georgeAtHomePosition, 'georgeAtHome')
     georgeAtHome = true
     outOfLives = true
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
     currentLives = livesStart
     livesScreen.innerHTML = currentLives 
     georgeAtHomePosition = null 
     gameisRunning = false
   } else {
-    window.alert('You have run out of lives!')
     clearInterval(intervalId)
     currentCountdown = countdownStart
     countdownScreen.innerHTML = currentCountdown
     georgeAtHome = true
     outOfLives = true
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'You\'re out of lives! Start again.'
     currentLives = livesStart
     livesScreen.innerHTML = currentLives 
     gameisRunning = false
@@ -1113,7 +1226,6 @@ cells.forEach(cell => {
 })
 // Then add trash cans to detection function above...
 
-// There must be a simpler way to do this! 
 let georgeAtHome = false
 let georgeAtHomePosition = null
 let secondGeorgeAtHomePosition = null
@@ -1126,9 +1238,6 @@ function arrivedAtHome() {
     addCoffeePoints()
     audio.src = 'design-elements/audio/summer-of-george.m4a'
     audio.play()
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'You did it! You got your first George across the street, now try another.'
-    // window.alert(`You did it! You got your first George home, now try another`)
     georgeAtHomePosition = georgePosition
     addSprite(georgeAtHomePosition, 'georgeAtHome')
     georgePosition = startPosition
@@ -1138,9 +1247,6 @@ function arrivedAtHome() {
     addCoffeePoints()
     audio.src = 'design-elements/audio/summer-of-george.m4a'
     audio.play()
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'Woohoo! You got your second George to Monk\'s, keep on going!'
-    // window.alert(`Woohoo! You got your second George home, keep on going!`)
     secondGeorgeAtHomePosition = georgePosition
     addSprite(secondGeorgeAtHomePosition, 'georgeAtHome')
     georgePosition = startPosition
@@ -1150,9 +1256,6 @@ function arrivedAtHome() {
     addCoffeePoints()
     audio.src = 'design-elements/audio/summer-of-george.m4a'
     audio.play()
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'Just two more to go!'
-    // window.alert(`Third time lucky, just two more to go!`)
     thirdGeorgeAtHomePosition = georgePosition
     addSprite(thirdGeorgeAtHomePosition, 'georgeAtHome')
     georgePosition = startPosition
@@ -1162,9 +1265,6 @@ function arrivedAtHome() {
     addCoffeePoints()
     audio.src = 'design-elements/audio/summer-of-george.m4a'
     audio.play()
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = 'So close! One more George to cross the street.'
-    // window.alert(`So close! One more George to cross the street.`)
     fourthGeorgeAtHomePosition = georgePosition
     addSprite(fourthGeorgeAtHomePosition, 'georgeAtHome')
     georgePosition = startPosition
@@ -1175,9 +1275,9 @@ function arrivedAtHome() {
     currentScore = currentScore + 500
     currentScore.innerHTML = currentScore
     gameisRunning = false
-    // popup.style.display = 'flex';
-    // popupMessage.innerHTML = `You did it! You got all your George\'s to the diner. Your final score is ${currentScore}`
-    window.alert(`You did it! You got all your Georges home - summer of George! Your final score is ${currentScore}`)
+    createYouWonPopup()
+    audio.src = 'design-elements/audio/elaine-dancing-short.m4a'
+    audio.play()
     clearInterval(intervalId)
     currentCountdown = countdownStart
     countdownScreen.innerHTML = currentCountdown
@@ -1223,7 +1323,7 @@ function handleStartCountdown() {
       clearInterval(intervalId)
       audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
       audio.play()
-      window.alert('Game over - you are out of time!')
+      createOutOfTimePopup()
       currentCountdown = countdownStart
       countdownScreen.innerHTML = currentCountdown
       currentScore = 0
@@ -1248,7 +1348,7 @@ function handleStartCountdown() {
       clearInterval(intervalId)
       audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
       audio.play()
-      window.alert('Game over - you are out of time!')
+      createOutOfTimePopup()
       currentCountdown = countdownStart
       countdownScreen.innerHTML = currentCountdown
       currentScore = 0
@@ -1271,7 +1371,7 @@ function handleStartCountdown() {
       clearInterval(intervalId)
       audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
       audio.play()
-      window.alert('Game over - you are out of time!')
+      createOutOfTimePopup()
       currentCountdown = countdownStart
       countdownScreen.innerHTML = currentCountdown
       currentScore = 0
@@ -1292,7 +1392,7 @@ function handleStartCountdown() {
       clearInterval(intervalId)
       audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
       audio.play()
-      window.alert('Game over - you are out of time!')
+      createOutOfTimePopup()
       currentCountdown = countdownStart
       countdownScreen.innerHTML = currentCountdown
       currentScore = 0
@@ -1311,7 +1411,7 @@ function handleStartCountdown() {
       clearInterval(intervalId)
       audio.src = 'design-elements/audio/seinfeld-theme-end.m4a'
       audio.play()
-      window.alert('Game over - you are out of time!')
+      createOutOfTimePopup()
       currentCountdown = countdownStart
       countdownScreen.innerHTML = currentCountdown
       currentScore = 0
