@@ -44,6 +44,8 @@ Overview <a name="overview"></a>
 
 This was my first project as part of the General Assembly immersive Software Engineering course, in which I built a frogger game using Vanilla JavaScript.
 
+🔗 [Deployed game](https://vanessaswanson.github.io/sei-project-one/)
+
 Project Brief <a name="projectbrief"></a>
 =============
 
@@ -68,12 +70,9 @@ Seinfeld Frogger <a name="seinfeldfrogger"></a>
 
 As a huge Seinfeld fan, I decided to pay homage to the Frogger episode by building a Seinfeld version of the classic [Frogger game](https://en.wikipedia.org/wiki/Frogger), in which the character George Costanza represents the frog and Monk's Diner represents the lily pad the frog is trying to reach.
 
-You can play the deployed game [here](https://vanessaswanson.github.io/sei-project-one/), or you can watch the video below for an overview of game play functionality.
+You can play the deployed game [here](https://vanessaswanson.github.io/sei-project-one/), or you can click the link below to watch a video showing an overview of game play functionality.
 
-
-
-
-
+[![image](https://user-images.githubusercontent.com/78015278/136405795-f7bdd291-fa33-4a0a-936c-ffda38a0dabf.png)](https://youtu.be/cxBSI3-r_Js)
 
 
 ## Process <a name="process"></a>
